@@ -1,0 +1,203 @@
+// Importing Tailwind CSS Preflight
+@import '@shivangswain/preflightcss/preflight.css';
+
+// Importing Fonts (Playfair + Inter)
+@font-face {
+    font-family: 'Playfair';
+    font-display: 'swap';
+    font-weight: 900;
+    src: url('/webfonts/playfair-display-800.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-display: 'swap';
+    font-weight: 400;
+    src: url('/webfonts/inter-400.woff2') format('woff2');
+}
+
+// Importing FontAwesome Icons
+@import '@shivangswain/fontawesomecss/fontawesome.min.css';
+
+// Importing variables
+@import '_variables.scss';
+
+// Setting light mode & dark mode colors
+:root {
+    .light {
+        --background: #ddd;
+        --colour: #111;
+    }
+
+    .dark {
+        --background: #111;
+        --colour: #ddd;
+    }
+}
+
+// Setting baseline CSS
+html {
+    font-size: $text-base;
+    line-height: $line-base;
+
+    @media (min-width: 768px) {
+        font-size: $text-lg;
+        line-height: $line-lg;
+    }
+
+    @media (min-width: 1024px) {
+        font-size: $text-xl;
+        line-height: $line-xl;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: $head;
+        font-weight: 800;
+    }
+
+    p {
+        font-family: $text;
+    }
+
+    :hover,
+    :focus-visible {
+        outline: none;
+    }
+}
+
+// Styles start here
+body {
+    background-color: var(--background);
+    color: var(--colour);
+    transition: color 500ms ease-in-out, background-color 500ms ease-in-out;
+
+    .content {
+        display: grid;
+        grid: 1fr 3fr 3fr / 1fr 8fr 1fr;
+        height: 100vh;
+        place-items: center;
+
+        @media (min-width: 768px) {
+            grid: 1fr 2fr 2fr / 1fr 4fr 1fr;
+        }
+
+        @media (min-width: 1024px) {
+            grid: 1fr 2fr 1fr / 1fr 6fr 1fr;
+        }
+
+        .main-text {
+            display: flex;
+            flex-direction: column;
+            grid-row: 2;
+            grid-column: 2;
+            justify-content: space-around;
+
+            h1 {
+                font-size: $text-3xl;
+                line-height: $line-3xl;
+
+                @media (min-width: 768px) {
+                    font-size: $text-5xl;
+                    line-height: $line-5xl;
+                }
+
+                @media (min-width: 1024px) {
+                    font-size: $text-6xl;
+                    line-height: $line-6xl;
+                }
+
+                // Slide out effect for full name
+                .slide-out {
+                    display: inline-block;
+                    max-width: 0;
+                    overflow: hidden;
+                    position: relative;
+                    transition-duration: 1s;
+                    vertical-align: bottom;
+                    white-space: pre;
+                }
+
+                // Slide out effect on hover or focus
+                &:hover,
+                &:focus-visible {
+                    .slide-out {
+                        max-width: 80%;
+                        transition: max-width 1s ease-in-out;
+                    }
+                }
+            }
+
+            p {
+                margin-top: 1rem;
+            }
+
+            // Links container
+            .links {
+                display: flex;
+                margin-top: 2rem;
+                place-content: center;
+                width: auto;
+
+                i {
+                    animation: accent-colour-out 500ms ease-in-out forwards;
+                    font-size: $text-3xl;
+                    line-height: $line-3xl;
+                    padding: 20px;
+                }
+
+                :hover,
+                :focus-visible {
+                    animation: accent-colour-in 500ms ease-in-out forwards;
+                }
+
+                @keyframes accent-colour-in {
+                    from { color: var(--colour) }
+                    to { color: $accent-colour }
+                }
+
+                @keyframes accent-colour-out {
+                    from { color: $accent-colour }
+                    to { color: var(--colour)}                
+                }
+            }
+        }
+
+        // Light/dark mode toggle styles
+        .toggle {
+            animation: drop-shadow-out 500ms ease-in-out forwards;
+            display: flex;
+            grid-column: 2;
+            grid-row: 3;
+
+            i {
+                font-size: $text-3xl;
+                line-height: $line-3xl;
+                padding: 20px;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            &:hover,
+            &:focus-visible {
+                animation: drop-shadow-in 500ms ease-in-out forwards;
+            }
+
+            @keyframes drop-shadow-in {
+                from { filter: none }
+                to { filter: drop-shadow(0px 0px 15px var(--colour)) }                
+            }
+
+            @keyframes drop-shadow-out {
+                from { filter: drop-shadow(0px 0px 15px var(--colour)) }
+                to { filter: none }
+            }
+        }
+    }
+}

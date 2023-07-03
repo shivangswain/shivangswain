@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /_headers
+Disallow: /_redirects
+Disallow: /styles/
+Disallow: /webfonts/
