@@ -5120,6 +5120,9 @@ __metadata:
     sass: ^1.63.6
     typescript: ^5.1.6
     vite: ^4.3.9
+  dependenciesMeta:
+    canvas@2.11.2:
+      unplugged: true
   languageName: unknown
   linkType: soft
 
