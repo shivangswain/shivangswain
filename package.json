@@ -1,11 +1,14 @@
 {
   "author": "Shivang P Swain <me@shiva.ng> (https://shiva.ng/)",
   "devDependencies": {
-    "@shivangswain/fontawesomecss": "^0.0.1",
-    "@shivangswain/preflightcss": "^0.0.1",
-    "sass": "^1.63.6",
-    "typescript": "^5.1.6",
-    "vite": "^4.3.9"
+    "@fontsource/inter": "latest",
+    "@fontsource/playfair-display": "latest",
+    "@material-symbols/font-600": "latest",
+    "@shivangswain/fontawesomecss": "latest",
+    "@shivangswain/preflightcss": "latest",
+    "sass": "latest",
+    "typescript": "latest",
+    "vite": "latest"
   },
   "homepage": "https://shiva.ng/",
   "license": "GPL-3.0-or-later",

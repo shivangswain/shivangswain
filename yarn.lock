@@ -159,10 +159,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/inter@npm:latest":
+  version: 5.0.4
+  resolution: "@fontsource/inter@npm:5.0.4"
+  checksum: 93ef85c869827c3627e141b1377d9864d9c15e8b7730979506a482c6250df7c2a4e50a0a715343ad24eb25092fb7d827065a758f56e9a5a05bcdcb8cd08fc07e
+  languageName: node
+  linkType: hard
+
+"@fontsource/playfair-display@npm:latest":
+  version: 5.0.4
+  resolution: "@fontsource/playfair-display@npm:5.0.4"
+  checksum: 6de4ef2f2524cdc9a9ec9eefadb0fc21d2f5d303e702de10e60f557497980219de863829b4f5e611bb1d2a65975f3e80f79adc9cfddbae7edbfa0e77bedfbd00
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
   checksum: 4059f790e2d07bf3c3ff3e0fec0daa8144fe35c1f6e0111c9921bd32106adaa97a4ab096ad7dab1e28ee6a9060083c4d1a4ada42a7f5f3f7a96b8812e2b757c1
+  languageName: node
+  linkType: hard
+
+"@material-symbols/font-600@npm:latest":
+  version: 0.9.0
+  resolution: "@material-symbols/font-600@npm:0.9.0"
+  checksum: f0fc8af343e868d209c540566d96d677e2f9eabed12a12ebc8e1676413bba0febbe4dafd6ac76af753d75dfc436e54ec91d05839602782a7ea5a2c45b3940e12
   languageName: node
   linkType: hard
 
@@ -186,14 +207,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shivangswain/fontawesomecss@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@shivangswain/fontawesomecss@npm:0.0.1"
-  checksum: 9925f1be46edc08c55c3c700da2ed75dc75d116377891ce452385ba416027c84dc5f32b26f2d546d71aab5054c4c318da46ac63ada5c68caf7b4a5b27993e5c7
+"@shivangswain/fontawesomecss@npm:latest":
+  version: 0.0.2
+  resolution: "@shivangswain/fontawesomecss@npm:0.0.2"
+  checksum: ef266a19b1e7535a88d37a073ef6579034de0ff7720292ce2a112b714bfef18cc7bbbb6b365462f53e5adac5a861872f58b053e62c9e7b5de10891fce2bdbc66
   languageName: node
   linkType: hard
 
-"@shivangswain/preflightcss@npm:^0.0.1":
+"@shivangswain/preflightcss@npm:latest":
   version: 0.0.1
   resolution: "@shivangswain/preflightcss@npm:0.0.1"
   checksum: cec2074c2099dccf58940f85c93d4013b50460d14aa10e5c582502c4670785515d5b9527a4f780207325322b634face78c733a29eb3a18aa766e9079e65b3380
@@ -1146,7 +1167,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.63.6":
+"sass@npm:latest":
   version: 1.63.6
   resolution: "sass@npm:1.63.6"
   dependencies:
@@ -1181,11 +1202,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "shivangswain@workspace:."
   dependencies:
-    "@shivangswain/fontawesomecss": ^0.0.1
-    "@shivangswain/preflightcss": ^0.0.1
-    sass: ^1.63.6
-    typescript: ^5.1.6
-    vite: ^4.3.9
+    "@fontsource/inter": latest
+    "@fontsource/playfair-display": latest
+    "@material-symbols/font-600": latest
+    "@shivangswain/fontawesomecss": latest
+    "@shivangswain/preflightcss": latest
+    sass: latest
+    typescript: latest
+    vite: latest
   languageName: unknown
   linkType: soft
 
@@ -1292,7 +1316,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.1.6":
+"typescript@npm:latest":
   version: 5.1.6
   resolution: "typescript@npm:5.1.6"
   bin:
@@ -1302,7 +1326,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^5.1.6#~builtin<compat/typescript>":
+"typescript@patch:typescript@latest#~builtin<compat/typescript>":
   version: 5.1.6
   resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"
   bin:
@@ -1337,7 +1361,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.3.9":
+"vite@npm:latest":
   version: 4.3.9
   resolution: "vite@npm:4.3.9"
   dependencies:
