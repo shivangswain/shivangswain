@@ -2,12 +2,15 @@
 @import '@shivangswain/preflightcss/preflight.css';
 
 // Importing Fonts (Playfair + Inter)
-@import 'https://fonts.googleapis.com/css2?family=Inter&family=Playfair+Display:wght@800&display=swap';
+@import '@fontsource/playfair-display/800.css';
+@import '@fontsource/inter';
+
 // Importing FontAwesome Icons
 @import '@shivangswain/fontawesomecss/fontawesome.min.css';
+@import '@shivangswain/fontawesomecss/brands.min.css';
 
 // Importing Material Symbols
-@import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,1,0';
+@import '@material-symbols/font-600/outlined.css';
 
 // Importing variables
 @import '_variables.scss';
@@ -52,6 +55,16 @@ html {
 
     p {
         font-family: $text;
+    }
+
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0;
+        transition: all 500ms ease-in-out;
+
+        &:hover,
+        &:focus-visible {
+            font-variation-settings: 'FILL' 1;
+        }
     }
 
     :hover,
@@ -110,6 +123,7 @@ body {
                     transition-duration: 1s;
                     vertical-align: bottom;
                     white-space: pre;
+                    transition: max-width 1s ease-out;
                 }
 
                 // Slide out effect on hover or focus
@@ -117,7 +131,6 @@ body {
                 &:focus-visible {
                     .slide-out {
                         max-width: 80%;
-                        transition: max-width 1s ease-in-out;
                     }
                 }
             }
@@ -132,37 +145,27 @@ body {
                 margin-top: 2rem;
                 place-content: center;
                 width: auto;
-
+                
                 i {
-                    animation: accent-colour-out 500ms ease-in-out forwards;
                     font-size: $text-3xl;
                     line-height: $line-3xl;
                     padding: 20px;
+                    transition: color 500ms ease-in-out;
                 }
 
                 :hover,
-                :focus-visible {
-                    animation: accent-colour-in 500ms ease-in-out forwards;
-                }
-
-                @keyframes accent-colour-in {
-                    from { color: var(--colour) }
-                    to { color: $accent-colour }
-                }
-
-                @keyframes accent-colour-out {
-                    from { color: $accent-colour }
-                    to { color: var(--colour)}                
+                :focus {
+                    color: $accent-colour;
                 }
             }
         }
 
         // Light/dark mode toggle styles
         .toggle {
-            animation: drop-shadow-out 500ms ease-in-out forwards;
             display: flex;
             grid-column: 2;
             grid-row: 3;
+            transition: filter 500ms ease-in-out;
 
             span {
                 font-size: $text-3xl;
@@ -176,17 +179,7 @@ body {
 
             &:hover,
             &:focus-visible {
-                animation: drop-shadow-in 500ms ease-in-out forwards;
-            }
-
-            @keyframes drop-shadow-in {
-                from { filter: none }
-                to { filter: drop-shadow(0px 0px 15px var(--colour)) }                
-            }
-
-            @keyframes drop-shadow-out {
-                from { filter: drop-shadow(0px 0px 15px var(--colour)) }
-                to { filter: none }
+                filter: drop-shadow(0px 0px 12px var(--colour));
             }
         }
     }

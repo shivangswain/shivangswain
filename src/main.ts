@@ -22,9 +22,9 @@ app.innerHTML = `
             <a href='/instagram' target='_blank' aria-label='Instagram'><i class='fa-brands fa-instagram'></i></a>
         </div>
     </div>
-    <button id='toggle' class='toggle' aria-label='Light/Dark Mode toggle'>
-        <span id='moon-icon' class="material-symbols-outlined">dark_mode</span>
-        <span id='sun-icon' class="material-symbols-outlined">light_mode</span>
+    <button id='toggle' class='toggle' aria-label='Light/Dark Mode toggle' type='button'>
+        <span id='moon-icon' class='material-symbols-outlined'>dark_mode</span>
+        <span id='sun-icon' class='material-symbols-outlined'>light_mode</span>
     </button>
 </div>
 `
