@@ -23,22 +23,14 @@ app.innerHTML = `
         </div>
     </div>
     <button id='toggle' class='toggle' aria-label='Light/Dark Mode toggle'>
-        <i id='moon-icon' class='fa-solid fa-moon hidden'></i>
-        <i id='sun-icon' class='fa-solid fa-sun hidden'></i>
+        <span id='moon-icon' class="material-symbols-outlined">dark_mode</span>
+        <span id='sun-icon' class="material-symbols-outlined">light_mode</span>
     </button>
 </div>
 `
 
-// Try to run the function to set dark mode
-try {
-    // Select the toggle button
-    const toggleButton = document.querySelector<HTMLButtonElement>('#toggle')!;
+// Select the toggle button
+const toggleButton = document.querySelector<HTMLButtonElement>('#toggle')!;
 
-    // Call toggleDarkMode function
-    toggleDarkMode(toggleButton)
-}
-
-// Console log errors if any
-catch (e) {
-    console.error('Dark Mode Switcher Error: ' + e)
-}
+// Call toggleDarkMode function
+toggleDarkMode(toggleButton)

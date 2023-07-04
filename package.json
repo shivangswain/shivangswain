@@ -3,7 +3,6 @@
   "devDependencies": {
     "@shivangswain/fontawesomecss": "^0.0.1",
     "@shivangswain/preflightcss": "^0.0.1",
-    "hint": "^7.1.10",
     "sass": "^1.63.6",
     "typescript": "^5.1.6",
     "vite": "^4.3.9"
