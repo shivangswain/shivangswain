@@ -15,32 +15,35 @@
 // Importing variables
 @import '_variables.scss';
 
+/* Colors */
+
 // Setting light mode & dark mode colors
 :root {
     .light {
         --background: #ddd;
-        --colour: #111;
+        --color: #111;
     }
 
     .dark {
         --background: #111;
-        --colour: #ddd;
+        --color: #ddd;
     }
 }
 
-// Setting baseline CSS
+/* Baseline CSS */
+
 html {
-    font-size: $text-base;
-    line-height: $line-base;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
 
     @media (min-width: 768px) {
-        font-size: $text-lg;
-        line-height: $line-lg;
+        font-size: $font-size-lg;
+        line-height: $line-height-lg;
     }
 
     @media (min-width: 1024px) {
-        font-size: $text-xl;
-        line-height: $line-xl;
+        font-size: $font-size-xl;
+        line-height: $line-height-xl;
     }
 
     h1,
@@ -49,12 +52,12 @@ html {
     h4,
     h5,
     h6 {
-        font-family: $head;
+        font-family: $head-font;
         font-weight: 800;
     }
 
     p {
-        font-family: $text;
+        font-family: $text-font;
     }
 
     .material-symbols-outlined {
@@ -73,24 +76,28 @@ html {
     }
 }
 
-// Styles start here
+/* Styles */
+
 body {
     background-color: var(--background);
-    color: var(--colour);
+    color: var(--color);
     transition: color 500ms ease-in-out, background-color 500ms ease-in-out;
 
     .content {
         display: grid;
-        grid: 1fr 3fr 3fr / 1fr 8fr 1fr;
+        grid-template-rows: 1fr 3fr 3fr;
+        grid-template-columns: 1fr 8fr 1fr;
         height: 100vh;
         place-items: center;
 
         @media (min-width: 768px) {
-            grid: 1fr 2fr 2fr / 1fr 4fr 1fr;
+            grid-template-rows: 1fr 2fr 2fr;
+            grid-template-columns: 1fr 4fr 1fr;
         }
 
         @media (min-width: 1024px) {
-            grid: 1fr 2fr 1fr / 1fr 6fr 1fr;
+            grid-template-rows: 1fr 2fr 1fr;
+            grid-template-columns: 1fr 6fr 1fr;
         }
 
         .main-text {
@@ -101,17 +108,17 @@ body {
             justify-content: space-around;
 
             h1 {
-                font-size: $text-3xl;
-                line-height: $line-3xl;
+                font-size: $font-size-3xl;
+                line-height: $line-height-3xl;
 
                 @media (min-width: 768px) {
-                    font-size: $text-5xl;
-                    line-height: $line-5xl;
+                    font-size: $font-size-5xl;
+                    line-height: $line-height-5xl;
                 }
 
                 @media (min-width: 1024px) {
-                    font-size: $text-6xl;
-                    line-height: $line-6xl;
+                    font-size: $font-size-6xl;
+                    line-height: $line-height-6xl;
                 }
 
                 // Slide out effect for full name
@@ -143,19 +150,19 @@ body {
             .links {
                 display: flex;
                 margin-top: 2rem;
-                place-content: center;
+                justify-content: center;
                 width: auto;
-                
+
                 i {
-                    font-size: $text-3xl;
-                    line-height: $line-3xl;
+                    font-size: $font-size-3xl;
+                    line-height: $line-height-3xl;
                     padding: 20px;
                     transition: color 500ms ease-in-out;
                 }
 
                 :hover,
                 :focus {
-                    color: $accent-colour;
+                    color: $accent-color;
                 }
             }
         }
@@ -163,13 +170,13 @@ body {
         // Light/dark mode toggle styles
         .toggle {
             display: flex;
-            grid-column: 2;
             grid-row: 3;
+            grid-column: 2;
             transition: filter 500ms ease-in-out;
 
             span {
-                font-size: $text-3xl;
-                line-height: $line-3xl;
+                font-size: $font-size-3xl;
+                line-height: $line-height-3xl;
                 padding: 20px;
             }
 
@@ -179,7 +186,7 @@ body {
 
             &:hover,
             &:focus-visible {
-                filter: drop-shadow(0px 0px 12px var(--colour));
+                filter: drop-shadow(0px 0px 12px var(--color));
             }
         }
     }
