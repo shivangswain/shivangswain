@@ -159,14 +159,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/inter@npm:^5.0.5":
+"@fontsource/inter@npm:latest":
   version: 5.0.5
   resolution: "@fontsource/inter@npm:5.0.5"
   checksum: 6888eaf1b2fb2fb134f7f77af36c718b49d1256617400fb78c47c0a62c4ff8435a7495c0d8ec1607ff23ab77e39f5a1e394a9c55f8bf368a535a46e54926371d
   languageName: node
   linkType: hard
 
-"@fontsource/playfair-display@npm:^5.0.5":
+"@fontsource/playfair-display@npm:latest":
   version: 5.0.5
   resolution: "@fontsource/playfair-display@npm:5.0.5"
   checksum: 8721f88a2fa0ad6e35ffb7efac42dacb8c1a95b14ca5ef651b5e3100830e508759d7f59688ef25105442fad6518c1946d1b01f25fdf88371fdd231baf4984660
@@ -180,7 +180,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material-symbols/font-600@npm:^0.9.0":
+"@material-symbols/font-600@npm:latest":
   version: 0.9.0
   resolution: "@material-symbols/font-600@npm:0.9.0"
   checksum: f0fc8af343e868d209c540566d96d677e2f9eabed12a12ebc8e1676413bba0febbe4dafd6ac76af753d75dfc436e54ec91d05839602782a7ea5a2c45b3940e12
@@ -207,14 +207,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shivangswain/fontawesomecss@npm:^0.0.2":
+"@shivangswain/fontawesomecss@npm:latest":
   version: 0.0.2
   resolution: "@shivangswain/fontawesomecss@npm:0.0.2"
   checksum: ef266a19b1e7535a88d37a073ef6579034de0ff7720292ce2a112b714bfef18cc7bbbb6b365462f53e5adac5a861872f58b053e62c9e7b5de10891fce2bdbc66
   languageName: node
   linkType: hard
 
-"@shivangswain/preflightcss@npm:^0.0.1":
+"@shivangswain/preflightcss@npm:latest":
   version: 0.0.1
   resolution: "@shivangswain/preflightcss@npm:0.0.1"
   checksum: cec2074c2099dccf58940f85c93d4013b50460d14aa10e5c582502c4670785515d5b9527a4f780207325322b634face78c733a29eb3a18aa766e9079e65b3380
@@ -1073,7 +1073,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.24":
+"postcss@npm:^8.4.25":
   version: 8.4.25
   resolution: "postcss@npm:8.4.25"
   dependencies:
@@ -1167,7 +1167,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.63.6":
+"sass@npm:latest":
   version: 1.63.6
   resolution: "sass@npm:1.63.6"
   dependencies:
@@ -1202,14 +1202,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "shivangswain@workspace:."
   dependencies:
-    "@fontsource/inter": ^5.0.5
-    "@fontsource/playfair-display": ^5.0.5
-    "@material-symbols/font-600": ^0.9.0
-    "@shivangswain/fontawesomecss": ^0.0.2
-    "@shivangswain/preflightcss": ^0.0.1
-    sass: ^1.63.6
-    typescript: ^5.1.6
-    vite: ^4.4.2
+    "@fontsource/inter": latest
+    "@fontsource/playfair-display": latest
+    "@material-symbols/font-600": latest
+    "@shivangswain/fontawesomecss": latest
+    "@shivangswain/preflightcss": latest
+    sass: latest
+    typescript: latest
+    vite: latest
   languageName: unknown
   linkType: soft
 
@@ -1316,7 +1316,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.1.6":
+"typescript@npm:latest":
   version: 5.1.6
   resolution: "typescript@npm:5.1.6"
   bin:
@@ -1326,7 +1326,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^5.1.6#~builtin<compat/typescript>":
+"typescript@patch:typescript@latest#~builtin<compat/typescript>":
   version: 5.1.6
   resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"
   bin:
@@ -1361,13 +1361,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "vite@npm:4.4.2"
+"vite@npm:latest":
+  version: 4.4.3
+  resolution: "vite@npm:4.4.3"
   dependencies:
     esbuild: ^0.18.10
     fsevents: ~2.3.2
-    postcss: ^8.4.24
+    postcss: ^8.4.25
     rollup: ^3.25.2
   peerDependencies:
     "@types/node": ">= 14"
@@ -1397,7 +1397,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 37a1c3a0ccc4b80c0a696203d3608d6bf7dc98219ddc178e528b972e3305af9ab8f92dea455421024e98c59372f6a97b1b4cc409a05f757a64bff830610053c6
+  checksum: 2f7c90de35c840ed7f33000d65006053885c0342aa7c19cee7369d7b3d92473a9bae790f910eb3e9900bdb7ca89559a772ee4782f35636ec4e6bd10717e7f5ff
   languageName: node
   linkType: hard
 
