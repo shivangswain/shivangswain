@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Allow: /assets/
+Disallow: /fonts/
+
+# Prevent crawling of social media redirect links
+Disallow: /facebook
+Disallow: /instagram
+Disallow: /paypal
+Disallow: /reddit
+Disallow: /snapchat
+Disallow: /telegram
+Disallow: /threads
+Disallow: /tiktok
+Disallow: /twitter
+Disallow: /youtube
+
+# Crawl-delay
+Crawl-delay: 10

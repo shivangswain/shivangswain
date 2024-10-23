@@ -1,35 +1,40 @@
 /* Font imports */
-@import url('@fontsource/playfair-display/700.css');
-@import url('@fortawesome/fontawesome-free/css/all.min.css');
-@import url('@material-symbols/font-600/rounded.css');
+@import url("@material-symbols/font-600/rounded.css");
 
 @font-face {
-  font-family: 'Open Runde';
-  src: url('/fonts/OpenRunde.woff2') format('woff2');
+  font-display: swap;
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 700;
+  src: url("@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Open Runde";
+  src: url("/fonts/OpenRunde.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display:swap
-}@font-face {
-  font-family: 'Open Runde';
-  src: url('/fonts/OpenRunde.woff') format('woff');
-  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-display: block;
+  font-family: "Font Awesome 6 Brands";
   font-style: normal;
-  font-display:swap
+  font-weight: 400;
+  src: url("@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2");
 }
 
 /* Base styles */
 :root {
   --bg-color: #ddd;
-  --hover-color: #6900ff;
   --text-color: #111;
-  --text-color-tr: #111111bb;
 }
 
 /* Dark mode styles */
 .dark-mode {
   --bg-color: #111;
   --text-color: #ddd;
-  --text-color-tr: #ddddddbb;
 }
 
 /* Global styles */
@@ -37,9 +42,8 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   display: grid;
-  font-family: 'Open Runde', sans-serif;
+  font-family: "Open Runde", sans-serif;
   grid-template-rows: 1fr auto;
-  /* Main content takes up available space, footer at the bottom */
   margin: 0;
   min-height: 100vh;
   padding: 0;
@@ -55,21 +59,20 @@ main {
   display: grid;
   padding: 2rem;
   place-items: center;
-  /* Center content both vertically and horizontally */
 }
 
 .content {
   max-width: 1080px;
-  /* Limit content width for readability */
 }
 
 /* Heading styles */
 h1 {
   display: inline-block;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 3.75rem;
   margin-bottom: 1rem;
   position: relative;
+  transition: color .5s, max-width .5s;
 }
 
 /* Paragraph styles */
@@ -84,7 +87,6 @@ p {
   display: inherit;
   max-width: 0;
   overflow: hidden;
-  transition: max-width .5s;
   vertical-align: bottom;
   white-space: pre;
 }
@@ -94,32 +96,76 @@ h1:is(:hover, :focus-visible, :active) .last-name {
   /* Reveal last name on hover */
 }
 
+.error:is(:hover, :focus-visible, :active) {
+  color: #ff6969;
+  /* 404 change color on hover */
+}
+
+.go-home {
+  background-image: linear-gradient(var(--text-color) 0 0);
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  color: var(--text-color);
+  padding-bottom: 1px;
+  text-decoration: inherit;
+  transition: background-position .5s, background-size .5s;
+}
+
+.go-home:is(:hover, :focus-visible, :active) {
+  background-position: 0% 100%;
+  background-size: 0% 1px;
+}
+
 /* Goldman Sachs logo styles */
 .intro .gs {
   fill: var(--text-color);
   height: 1.125rem;
-  vertical-align: top;
   margin: 0.15rem auto auto 0.1rem;
   transition: fill .5s;
+  vertical-align: top;
 }
 
 .intro:is(:hover, :focus-visible, :active) .gs {
-  fill: #7399C6;
+  fill: #7399c6;
 }
 
 /* Social links styles */
 .social-links {
   display: grid;
-  gap: 2rem;
+  gap: 2.5rem;
   grid-template-columns: repeat(3, auto);
   justify-content: center;
 }
 
-.social-links i {
+.social-links a {
   color: var(--text-color);
+  font-family: "Font Awesome 6 Brands";
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+
+.social-links .fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: var(--fa-display, inline-block);
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
   transition: color .5s;
+}
+
+.social-links .fa-github:before {
+  content: "\f09b";
+}
+
+.social-links .fa-linkedin-in:before {
+  content: "\f0e1";
+}
+
+.fa-instagram:before {
+  content: "\f16d";
 }
 
 .social-links a:is(:hover, :focus-visible, :active) .fa-github {
@@ -131,12 +177,14 @@ h1:is(:hover, :focus-visible, :active) .last-name {
 }
 
 .social-links a .fa-instagram {
-  background: radial-gradient(circle at 30% 110%,
-      #ffdb8b 0%,
-      #ee653d 25%,
-      #d42e81 50%,
-      #a237b6 75%,
-      #3e57bc 100%);
+  background: radial-gradient(
+    circle at 30% 110%,
+    #ffdb8b 0%,
+    #ee653d 25%,
+    #d42e81 50%,
+    #a237b6 75%,
+    #3e57bc 100%
+  );
   background-clip: text;
 }
 
@@ -145,29 +193,30 @@ h1:is(:hover, :focus-visible, :active) .last-name {
 }
 
 .footer {
-  display: grid;
-  grid-template-columns:repeat(2, auto);
   align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
 }
 
+/* Resume link styles */
 .resume a {
+  background-image: linear-gradient(var(--text-color) 0 0);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
   color: var(--text-color);
+  display: inline-block;
   font-size: 1rem;
   line-height: 1.25rem;
-  margin: 3rem;
+  margin: 5rem;
+  padding-bottom: 1px;
   place-self: start;
   text-decoration: inherit;
-  display: inline-block;
-  padding-bottom: 1px;
-  background-image: linear-gradient(var(--text-color) 0 0);
-  background-position: 0 100%; /*OR bottom left*/
-  background-size: 0% 1px;
-  background-repeat: no-repeat;
-  transition: background-size 0.3s, background-position 0s 0.3s; /*change after the size immediately*/
+  transition: background-position .5s, background-size .5s;
 }
 
 .resume a:is(:hover, :focus-visible, :active) {
-  background-position: 100% 100%; /*OR bottom right*/
+  background-position: 100% 100%;
   background-size: 100% 1px;
 }
 
@@ -183,15 +232,15 @@ h1:is(:hover, :focus-visible, :active) .last-name {
   border: none;
   color: var(--text-color);
   cursor: pointer;
-  margin: 3rem;
+  margin: 5rem;
   place-self: end;
 }
 
 #theme-toggle i {
   font-size: 1.875rem;
-  font-variation-settings: 'FILL' 0; /* Initial unfilled state */
+  font-variation-settings: "FILL" 0;
   line-height: 2.25rem;
-  transition: font-variation-settings .5s, filter .5s, transform .5s;
+  transition: filter .5s, font-variation-settings .5s;
 }
 
 #theme-toggle .light {
@@ -203,8 +252,8 @@ h1:is(:hover, :focus-visible, :active) .last-name {
 }
 
 #theme-toggle:is(:hover, :focus-visible, :active) i {
-  filter: drop-shadow(0 0 12px var(--text-color)); /* Glow effect */
-  font-variation-settings: 'FILL' 1; /* Filled state on hover */
+  filter: drop-shadow(0 0 12px var(--text-color));
+  font-variation-settings: "FILL" 1;
 }
 
 /* Responsive styles */
@@ -226,6 +275,14 @@ h1:is(:hover, :focus-visible, :active) .last-name {
   .social-links a {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .resume a {
+    margin: 5rem 3rem;
+  }
+
+  #theme-toggle {
+    margin: 5rem 3rem;
   }
 }
 
