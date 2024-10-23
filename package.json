@@ -1,0 +1,25 @@
+{
+  "author": "Shivang P Swain <me@shivangswain.com> (https://shivangswain.com/)",
+  "description": "Shivang is a 24 year old cybersecurity analyst working in the Technology Risk division at Goldman Sachs.",
+  "devDependencies": {
+    "@fontsource/playfair-display": "latest",
+    "@fortawesome/fontawesome-free": "latest",
+    "@material-symbols/font-600": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "homepage": "https://shivangswain.com",
+  "license": "GPL-3.0-or-later",
+  "main": "index.html",
+  "name": "shivangswain",
+  "packageManager": "npm@10.9.0",
+  "private": true,
+  "repository": "github:shivangswain/shivangswain",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
