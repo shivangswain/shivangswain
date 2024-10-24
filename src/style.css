@@ -27,7 +27,7 @@
 
 @font-face {
   font-display: block;
-  font-family: "Material Symbols Rounded";
+  font-family: "Material Symbols Rounded Local";
   font-style: normal;
   font-weight: 400;
   src: url("/assets/Material-Symbols-Rounded-Custom.woff2") format("woff2");
@@ -81,7 +81,7 @@ body {
 }
 
 .material-symbols-rounded {
-  font-family: "Material Symbols Rounded";
+  font-family: "Material Symbols Rounded", "Material Symbols Rounded Local";
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -149,18 +149,9 @@ p {
   white-space: pre;
 }
 
-h1:is(:hover, :focus-visible, :active) .last-name {
-  max-width: 80%;
-  /* Reveal last name on hover */
-}
-
 .error {
   color: var(--text-color);
   transition: color 0.5s;
-}
-
-.error:is(:hover, :focus-visible, :active) {
-  color: #ff6969;
 }
 
 .go-home {
@@ -174,11 +165,6 @@ h1:is(:hover, :focus-visible, :active) .last-name {
   transition: background-position 0s 0.5s, background-size 0.5s, color 0.5s;
 }
 
-.go-home:is(:hover, :focus-visible, :active) {
-  background-position: 100% 100%;
-  background-size: 100% 2px;
-}
-
 /* Goldman Sachs logo styles */
 .gs {
   fill: var(--text-color);
@@ -186,10 +172,6 @@ h1:is(:hover, :focus-visible, :active) .last-name {
   margin: -0.05rem auto auto 0.1rem;
   transition: fill 0.5s;
   vertical-align: text-top;
-}
-
-.intro:is(:hover, :focus-visible, :active) .gs {
-  fill: #7399c6;
 }
 
 /* Social links styles */
@@ -223,24 +205,6 @@ h1:is(:hover, :focus-visible, :active) .last-name {
   content: "\f16d";
 }
 
-/* Root mode hover effects */
-body:not(.light-mode):not(.dark-mode)
-  .social-links
-  a:is(:hover, :focus-visible, :active)
-  .fab {
-  filter: drop-shadow(0 0 1rem var(--text-color));
-}
-
-.light-mode .social-links a:is(:hover, :focus-visible, :active) .fa-github,
-.dark-mode .social-links a:is(:hover, :focus-visible, :active) .fa-github {
-  color: #6e40c9;
-}
-
-.light-mode .social-links a:is(:hover, :focus-visible, :active) .fa-linkedin-in,
-.dark-mode .social-links a:is(:hover, :focus-visible, :active) .fa-linkedin-in {
-  color: #0a66c2;
-}
-
 .fa-instagram {
   background: radial-gradient(
     circle at 30% 110%,
@@ -249,82 +213,121 @@ body:not(.light-mode):not(.dark-mode)
     #d42e81 50%,
     #a237b6 75%,
     #3e57bc 100%
-  );
-  background-clip: text;
-}
+    );
+    background-clip: text;
+  }
+  
+  .footer {
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    margin: 5rem;
+    max-width: 1080px;
+  }
+  
+  /* Resume link styles */
+  .resume a {
+    background-image: linear-gradient(var(--text-color) 0 0);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    color: var(--text-color);
+    display: inline-block;
+    font-size: 1rem;
+    justify-self: start;
+    line-height: 1.25rem;
+    padding-bottom: 1px;
+    text-decoration: inherit;
+    transition: background-position 0s 0.5s, background-size 0.5s;
+  }
+  
+  .resume i {
+    margin: auto auto 0.25rem auto;
+    transform: rotate(-45deg);
+    vertical-align: middle;
+  }
+  
+  /* Theme toggle button styles */
+  #theme-toggle {
+    background: none;
+    border-radius: 50%;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    justify-self: end;
+  }
+  
+  #theme-toggle i {
+    font-size: 1.875rem;
+    font-variation-settings: "FILL" 0;
+    line-height: 2.25rem;
+    transition: filter 0.5s, font-variation-settings 0.5s, transform 0.5s;
+  }
+  
+  #theme-toggle .light {
+    transform: rotate(-135deg);
+  }
+  
+  #theme-toggle .dark {
+    transform: rotate(0deg);
+  }
+  
+  #theme-toggle .star {
+    transform: rotate(144deg);
+  }
+  
+  /* Hover styles */
+  @media(hover: hover) and (pointer: fine) {
+    h1:is(:hover) .last-name {
+      max-width: 80%;
+      /* Reveal last name on hover */
+    }
+    
+    .error:is(:hover) {
+      color: #ff6969;
+    }
+    
+    .go-home:is(:hover, :focus-visible) {
+      background-position: 100% 100%;
+      background-size: 100% 2px;
+    }
+    
+    .intro:is(:hover) .gs {
+      fill: #7399c6;
+    }
 
-.light-mode .social-links a:is(:hover, :focus-visible, :active) .fa-instagram,
-.dark-mode .social-links a:is(:hover, :focus-visible, :active) .fa-instagram {
-  color: transparent;
-}
-
-.footer {
-  align-items: center;
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  margin: 5rem;
-  max-width: 1080px;
-}
-
-/* Resume link styles */
-.resume a {
-  background-image: linear-gradient(var(--text-color) 0 0);
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  background-size: 0% 2px;
-  color: var(--text-color);
-  display: inline-block;
-  font-size: 1rem;
-  justify-self: start;
-  line-height: 1.25rem;
-  padding-bottom: 1px;
-  text-decoration: inherit;
-  transition: background-position 0s 0.5s, background-size 0.5s;
-}
-
-.resume a:is(:hover, :focus-visible, :active) {
-  background-position: 100% 100%;
-  background-size: 100% 2px;
-}
-
-.resume i {
-  margin: auto auto 0.25rem auto;
-  transform: rotate(-45deg);
-  vertical-align: middle;
-}
-
-/* Theme toggle button styles */
-#theme-toggle {
-  background: none;
-  border-radius: 50%;
-  border: none;
-  color: var(--text-color);
-  cursor: pointer;
-  justify-self: end;
-}
-
-#theme-toggle i {
-  font-size: 1.875rem;
-  font-variation-settings: "FILL" 0;
-  line-height: 2.25rem;
-  transition: filter 0.5s, font-variation-settings 0.5s, transform 0.5s;
-}
-
-#theme-toggle .light {
-  transform: rotate(-135deg);
-}
-
-#theme-toggle .dark {
-  transform: rotate(0deg);
-}
-
-#theme-toggle .star {
-  transform: rotate(144deg);
-}
-
-#theme-toggle:is(:hover, :focus-visible, :active) i {
-  filter: drop-shadow(0 0 1rem var(--text-color));
-  font-variation-settings: "FILL" 1;
+    /* Root mode hover effects */
+    body:not(.light-mode):not(.dark-mode)
+    .social-links
+    a:is(:hover, :focus-visible)
+    .fab {
+    filter: drop-shadow(0 0 1rem var(--text-color));
+  }
+  
+  .light-mode .social-links a:is(:hover, :focus-visible) .fa-github,
+  .dark-mode .social-links a:is(:hover, :focus-visible) .fa-github {
+    color: #6e40c9;
+  }
+  
+  .light-mode .social-links a:is(:hover, :focus-visible) .fa-linkedin-in,
+  .dark-mode .social-links a:is(:hover, :focus-visible) .fa-linkedin-in {
+    color: #0a66c2;
+  }
+  
+  .light-mode .social-links a:is(:hover, :focus-visible) .fa-instagram,
+  .dark-mode .social-links a:is(:hover, :focus-visible) .fa-instagram {
+    color: transparent;
+  }
+  
+  .resume a:is(:hover, :focus-visible) {
+    background-position: 100% 100%;
+    background-size: 100% 2px;
+  }
+  
+  #theme-toggle:is(:hover, :focus-visible) i {
+    filter: drop-shadow(0 0 1rem var(--text-color));
+    font-variation-settings: "FILL" 1;
+  }
 }
 
 /* Responsive styles */
@@ -354,11 +357,6 @@ body:not(.light-mode):not(.dark-mode)
   h1 {
     font-size: 2.25rem;
     line-height: 2.5rem;
-  }
-
-  .last-name {
-    display: none;
-    /* Hide last name on very small screens */
   }
 
   .content {
