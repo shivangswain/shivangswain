@@ -51,6 +51,11 @@
 }
 
 /* Global styles */
+html {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--bg-color);
   color: var(--text-color);
@@ -93,7 +98,7 @@ body {
 
 #noise {
   background-image: url("/assets/otis-redding.png");
-  min-height: 100vh;
+  min-height: 100lvh;
   opacity: 0.75;
   pointer-events: none;
   position: fixed;
@@ -354,5 +359,13 @@ body:not(.light-mode):not(.dark-mode)
   .last-name {
     display: none;
     /* Hide last name on very small screens */
+  }
+
+  .content {
+    margin: 3rem;
+  }
+
+  .footer {
+    margin: 3rem 3rem 8rem;
   }
 }

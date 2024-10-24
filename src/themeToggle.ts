@@ -7,6 +7,7 @@ type Theme = "light" | "dark" | "root";
  * Sets up the theme toggle functionality
  */
 export function setupThemeToggle() {
+  const themeColor = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement;
   const themeToggle = document.getElementById(
     "theme-toggle"
   ) as HTMLButtonElement;
@@ -32,14 +33,17 @@ export function setupThemeToggle() {
     // Update icon based on theme
     switch (theme) {
       case "light":
+        themeColor.setAttribute('content', "#d7d7d7");
         themeIcon.textContent = "light_mode";
         themeIcon.className = "material-symbols-rounded light";
         break;
       case "dark":
+        themeColor.setAttribute('content', "#181818");
         themeIcon.textContent = "dark_mode";
         themeIcon.className = "material-symbols-rounded dark";
         break;
       case "root":
+        themeColor.setAttribute('content', "#1b2e8b");
         themeIcon.textContent = "star";
         themeIcon.className = "material-symbols-rounded star";
         break;
