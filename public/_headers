@@ -5,7 +5,7 @@
   Referrer-Policy: no-referrer
   Permissions-Policy: camera=(), microphone=(), geolocation=(), document-domain=()
   Access-Control-Allow-Origin: https://shivangswain.com
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com http://ajax.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com; media-src 'self'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; form-action 'self'; base-uri 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com http://ajax.cloudflare.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data:; font-src 'self' data: fonts.gstatic.com; connect-src 'self' https://cloudflareinsights.com; media-src 'self'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; form-action 'self'; base-uri 'self';
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   # Performance & Optimization Headers
   Cache-Control: public, max-age=31536000, immutable

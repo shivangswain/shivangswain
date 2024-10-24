@@ -1,4 +1,9 @@
 /**
+ * Theme type definition
+ */
+type Theme = "light" | "dark" | "root";
+
+/**
  * Sets up the theme toggle functionality
  */
 export function setupThemeToggle() {
@@ -6,33 +11,53 @@ export function setupThemeToggle() {
     "theme-toggle"
   ) as HTMLButtonElement;
   const themeIcon = themeToggle.querySelector("i") as HTMLElement;
-  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
-  // Function to toggle dark mode
-  const toggleDarkMode = (isDark: boolean): void => {
-    document.body.classList.toggle("dark-mode", isDark);
-    themeIcon.textContent = isDark ? "dark_mode" : "light_mode";
-    themeIcon.className = isDark
-      ? "material-symbols-rounded dark"
-      : "material-symbols-rounded light";
-    localStorage.setItem("theme", isDark ? "dark" : "light");
+  // Function to get the next theme in the cycle
+  const getNextTheme = (currentTheme: Theme): Theme => {
+    const themeOrder: Theme[] = ["light", "dark", "root"];
+    const currentIndex = themeOrder.indexOf(currentTheme);
+    return themeOrder[(currentIndex + 1) % themeOrder.length];
+  };
+
+  // Function to update theme classes and icon
+  const updateTheme = (theme: Theme): void => {
+    // Remove all theme classes first
+    document.body.classList.remove("dark-mode", "light-mode");
+
+    // Apply appropriate theme class if not root
+    if (theme !== "root") {
+      document.body.classList.add(`${theme}-mode`);
+    }
+
+    // Update icon based on theme
+    switch (theme) {
+      case "light":
+        themeIcon.textContent = "light_mode";
+        themeIcon.className = "material-symbols-rounded light";
+        break;
+      case "dark":
+        themeIcon.textContent = "dark_mode";
+        themeIcon.className = "material-symbols-rounded dark";
+        break;
+      case "root":
+        themeIcon.textContent = "star";
+        themeIcon.className = "material-symbols-rounded star";
+        break;
+    }
+
+    // Save theme preference
+    localStorage.setItem("theme", theme);
   };
 
   // Check for saved user preference, if any, on load
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "dark" || (!savedTheme && prefersDarkScheme.matches)) {
-    toggleDarkMode(true);
-  }
+  const savedTheme = (localStorage.getItem("theme") as Theme) || "root";
+  updateTheme(savedTheme);
 
   // Listen for clicks on the toggle button
   themeToggle.addEventListener("click", () => {
-    const isDarkMode = document.body.classList.contains("dark-mode");
-    toggleDarkMode(!isDarkMode);
-  });
-
-  // Listen for changes in the OS-level color scheme preference
-  prefersDarkScheme.addEventListener("change", (e) => {
-    toggleDarkMode(e.matches);
+    const currentTheme = (localStorage.getItem("theme") as Theme) || "root";
+    const nextTheme = getNextTheme(currentTheme);
+    updateTheme(nextTheme);
   });
 }
 
