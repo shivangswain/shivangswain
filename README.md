@@ -137,8 +137,8 @@ I am proficient in the following tools & technologies:
 
 You can find me on:
 
-<a href='https://shiva.ng/github'><img width='48' height='48' src="./public/icons/github.png" alt="github"/></a>
-<a href='https://shiva.ng/linkedin'><img width='48' height='48' src="./public/icons/linkedin.png" alt="linkedin"/></a>
-<a href='https://shiva.ng/instagram'><img width='48' height='48' src="./public/icons/instagram.png" alt="instagram"/></a>
+<a href='https://shiva.ng/github'><img width='48' height='48' src="./icons/github.png" alt="github"/></a>
+<a href='https://shiva.ng/linkedin'><img width='48' height='48' src="./icons/linkedin.png" alt="linkedin"/></a>
+<a href='https://shiva.ng/instagram'><img width='48' height='48' src="./icons/instagram.png" alt="instagram"/></a>
 
 I'm @shivangswain on all socials.

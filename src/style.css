@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: "Open Runde";
-  src: url("/fonts/OpenRunde.woff2") format("woff2");
+  src: url("/assets/OpenRunde.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -72,7 +72,6 @@ h1 {
   font-size: 3.75rem;
   margin-bottom: 1rem;
   position: relative;
-  transition: color .5s, max-width .5s;
 }
 
 /* Paragraph styles */
@@ -87,6 +86,7 @@ p {
   display: inherit;
   max-width: 0;
   overflow: hidden;
+  transition: max-width .5s;
   vertical-align: bottom;
   white-space: pre;
 }
@@ -109,7 +109,7 @@ h1:is(:hover, :focus-visible, :active) .last-name {
   color: var(--text-color);
   padding-bottom: 1px;
   text-decoration: inherit;
-  transition: background-position .5s, background-size .5s;
+  transition: background-position 0s .5s, background-size .5s;
 }
 
 .go-home:is(:hover, :focus-visible, :active) {
@@ -212,7 +212,7 @@ h1:is(:hover, :focus-visible, :active) .last-name {
   padding-bottom: 1px;
   place-self: start;
   text-decoration: inherit;
-  transition: background-position .5s, background-size .5s;
+  transition: background-position 0s .5s, background-size .5s;
 }
 
 .resume a:is(:hover, :focus-visible, :active) {
