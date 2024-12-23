@@ -14,7 +14,7 @@ export function setupThemeToggle() {
     "theme-toggle"
   ) as HTMLButtonElement;
   const themeIcon = themeToggle.querySelector("i") as HTMLElement;
-  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
   // Function to get the next theme in the cycle
   const getNextTheme = (currentTheme: Theme): Theme => {
@@ -58,7 +58,7 @@ export function setupThemeToggle() {
 
   // Check for saved user preference, if any, on load
   const savedTheme =
-    (localStorage.getItem("theme") as Theme) || prefersDarkScheme ? "dark" : "light";
+    (localStorage.getItem("theme") as Theme) || prefersDarkScheme.matches ? "dark" : "light";
   updateTheme(savedTheme);
 
   // Listen for clicks on the toggle button
