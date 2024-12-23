@@ -58,7 +58,7 @@ export function setupThemeToggle() {
 
   // Check for saved user preference, if any, on load
   const savedTheme =
-    (localStorage.getItem("theme") as Theme) || prefersDarkScheme.matches ? "dark" : "light";
+    (localStorage.getItem("theme") as Theme) || (prefersDarkScheme.matches ? "dark" : "light");
   updateTheme(savedTheme);
 
   // Listen for clicks on the toggle button
