@@ -14,7 +14,7 @@ export function setupThemeToggle() {
     "theme-toggle"
   ) as HTMLButtonElement;
   const themeIcon = themeToggle.querySelector("i") as HTMLElement;
-  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   // Function to get the next theme in the cycle
   const getNextTheme = (currentTheme: Theme): Theme => {
