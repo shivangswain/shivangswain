@@ -178,7 +178,7 @@ p {
 .social-links {
   display: grid;
   gap: 2.5rem;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
 }
 
@@ -195,6 +195,7 @@ p {
 
 .fa-github:before {
   content: "\f09b";
+  font-size: 2.15rem;
 }
 
 .fa-linkedin-in:before {
@@ -203,6 +204,11 @@ p {
 
 .fa-instagram:before {
   content: "\f16d";
+}
+
+.fa-bluesky:before {
+  content: "\e671";
+  font-size: 2rem;
 }
 
 .fa-instagram {
@@ -318,6 +324,11 @@ p {
   .dark-mode .social-links a:is(:hover, :focus-visible) .fa-instagram {
     color: transparent;
   }
+
+  .light-mode .social-links a:is(:hover, :focus-visible) .fa-bluesky,
+  .dark-mode .social-links a:is(:hover, :focus-visible) .fa-bluesky {
+    color: #0a7aff;
+  }  
   
   .resume a:is(:hover, :focus-visible) {
     background-position: 100% 100%;
