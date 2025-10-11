@@ -3,8 +3,14 @@ Allow: /
 Allow: /assets/
 
 # Prevent crawling of social media redirect links
+Disallow: /blog
+Disallow: /bluesky
 Disallow: /facebook
+Disallow: /github
+Disallow: /gitlab
 Disallow: /instagram
+Disallow: /linkedin
+Disallow: /medium
 Disallow: /paypal
 Disallow: /reddit
 Disallow: /snapchat
@@ -12,6 +18,7 @@ Disallow: /telegram
 Disallow: /threads
 Disallow: /tiktok
 Disallow: /twitter
+Disallow: /x
 Disallow: /youtube
 
 # Crawl-delay

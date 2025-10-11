@@ -2,7 +2,7 @@
 
 I'm [Shivang P Swain](https://shiva.ng), a 25 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs.
 
-I have a strong background in computer science, with a focus on Cybersecurity and Network Security. Furthermore, I am interested in and have worked on Full Stack, DevOps and Cloud Services as well. As an associate in the Technology Risk division at Goldman Sachs, I work to identify, assess, and mitigate technology risks within the organization.
+As a cybersecurity professional with 3+ years of experience driving large-scale security initiatives at a top global investment bank, I'm skilled in uplifting platform security, building scalable guardrails, and securing large-scale infrastructure in AWS, GCP, and on-prem ecosystems. I'm known for enabling secure innovation through pragmatic controls, cross-functional collaboration, and automation-driven security frameworks.
 
 In my free time, I enjoy exploring new technologies and staying up-to-date with the latest cybersecurity trends. I also enjoy contributing to open-source projects, building websites, working on my homelab, and jailbreaking/rooting devices.
 
@@ -13,18 +13,18 @@ I've expertise in the following security skills:
 <table>
 <tr>
 <td>Standards</td>
-<td>NIST SP 800-53 ∙ ISO/IEC 27001 ∙ NIST AI RMF ∙ OWASP ∙ STRIDE Framework</td>
-</tr>
-<tr>
-<td>Expertise</td>
-<td>Threat Modelling ∙ Control Development ∙ Threat Analysis ∙ Threat Assessment ∙ Risk Management ∙ Regulatory Compliance</td>
+<td>NIST SP 800-53 ∙ ISO/IEC 27001 ∙ CIS Benchmarks ∙ NIST AI RMF ∙ OWASP ∙ STRIDE Framework</td>
 </tr>
 <tr>
 <td>Domains</td>
-<td>Cloud Security ∙ Container Security ∙ AI Security</td>
+<td>Cloud Security ∙ AI Security ∙ Container Security ∙ Threat Modelling ∙ Application Security ∙ Control Development ∙ Risk Assessment ∙ Governance, Risk, and Compliance (GRC)</td>
 </tr>
 <tr>
-<td>Areas of Focus</td>
+<td>Platforms</td>
+<td>Amazon Web Services (AWS) ∙ Google Cloud Platform (GCP) ∙ RedHat OpenShift ∙ Kubernetes</td>
+</tr>
+<tr>
+<td>Focus</td>
 <td>Identity & Access Management (IAM) ∙ Network Security ∙ Data Security ∙ Secure SDLC ∙ Business Continuity & Resiliency Planning</td>
 </tr>
 </table>
