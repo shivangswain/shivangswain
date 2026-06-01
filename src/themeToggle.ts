@@ -1,8 +1,8 @@
 /**
  * Theme toggle. Cycles light → dark → root (default blue) on click, persists to
- * localStorage, and follows the OS preference until the user picks one. The
- * pre-paint FOUC guard lives inline in index.html / 404.html; this handles the
- * runtime UI: icon swap, theme-color meta, and OS-change sync.
+ * localStorage, and follows the OS preference. The pre-paint FOUC guard lives
+ * inline in index.html / 404.html; this handles the runtime UI: icon swap,
+ * theme-colour meta, and OS-change sync.
  */
 
 type Theme = "light" | "dark" | "root";
@@ -14,7 +14,7 @@ const ORDER: readonly Theme[] = ["light", "dark", "root"] as const;
 const META_COLOR: Record<Theme, string> = {
 	light: "#d7d7d7",
 	dark: "#181818",
-	root: "#1b2e8b",
+	root: "#1c2f8c",
 };
 
 const ICON: Record<Theme, string> = {
@@ -80,9 +80,9 @@ function setupThemeToggle(): void {
 		applyTheme(next);
 	});
 
-	// Follow OS-level changes only when the user hasn't pinned a choice.
+	// Follow OS-level changes.
 	prefersDark.addEventListener("change", (e) => {
-		if (readStoredTheme() === null) applyTheme(e.matches ? "dark" : "light");
+		applyTheme(e.matches ? "dark" : "light");
 	});
 }
 

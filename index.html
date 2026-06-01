@@ -23,37 +23,38 @@
 	<!-- SEO -->
 	<meta name="author" content="Shivang P Swain" />
 	<meta name="description"
-		content="Shivang is a 26 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs." />
-	<meta name="keywords" content="Shivang P Swain, cybersecurity, associate, Goldman Sachs, Technology Risk" />
+		content="I'm Shivang P Swain, a 26 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs." />
+	<meta name="keywords" content="Shivang, Shivang P Swain, cybersecurity, security, analyst, associate, GS, Goldman Sachs, Technology Risk, Tech Risk, professional" />
 	<link rel="canonical" href="https://shivangswain.com/" />
 
 	<!-- Open Graph + Twitter Card for rich link previews -->
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Shivang P Swain" />
 	<meta property="og:description"
-		content="Shivang is a 26 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs." />
+		content="I'm Shivang P Swain, a 26 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs." />
 	<meta property="og:url" content="https://shivangswain.com/" />
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:title" content="Shivang P Swain" />
 	<meta name="twitter:description"
-		content="Shivang is a 26 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs." />
+		content="I'm Shivang P Swain, a 26 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs." />
 
 	<!-- Mastodon profile verification -->
 	<link rel="me" href="https://mastodon.social/@shivangswain" />
 
 	<!-- App identity / favicons -->
+	<link rel="icon" href="/favicon.ico" sizes="/favicon.ico" />
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-	<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
-	<link rel="shortcut icon" href="/favicon.ico" />
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-	<meta name="apple-mobile-web-app-title" content="Shivang" />
+	<link rel="apple-touch-icon" sizes="192x192" href="/assets/192.png" />
 	<link rel="manifest" href="/site.webmanifest" />
-	<meta name="theme-color" content="#1c2f8c" media="(prefers-color-scheme: light)" />
-	<meta name="theme-color" content="#171717" media="(prefers-color-scheme: dark)" />
+	<meta name="theme-color" content="#1c2f8c" />
+	<meta name="theme-color" content="#181818" media="(prefers-color-scheme: light)" />
+	<meta name="theme-color" content="#d7d7d7" media="(prefers-color-scheme: dark)" />
 
-	<!-- Preconnect to Google's font hosts so the deferred icon-font request is cheap. -->
+	<!-- Preconnect to the icon-font hosts so the deferred requests are cheap. -->
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="preconnect" href="https://kit.fontawesome.com" crossorigin />
+	<link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin />
 
 	<!-- Preload Open Runde, the above-the-fold body face. -->
 	<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/OpenRunde-Regular.woff2" />
@@ -71,6 +72,11 @@
 		<link rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=swap&icon_names=arrow_forward,dark_mode,light_mode,star" />
 	</noscript>
+
+	<!-- Font Awesome brand icons, auto-subset by the kit to just the icons used.
+	     Deferred so it stays off the critical path; if the kit fails to load, .fab
+	     falls back to the self-hosted "Font Awesome 6 Brands Local" face. -->
+	<script defer src="https://kit.fontawesome.com/4bc095182c.js" crossorigin="anonymous"></script>
 
 	<!-- type=module defers automatically, so this doesn't block first paint. -->
 	<script type="module" src="/src/themeToggle.ts"></script>

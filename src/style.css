@@ -18,17 +18,17 @@
   src: url("/assets/OpenRunde-Regular.woff2") format("woff2");
 }
 
+/* Self-hosted brand-icon & icon-font backups under a distinct family name, listed as the
+ * second choice on `.fab` & `.material-symbols-rounded`, so it's only fetched if the
+ * primary Font Awesome kit and/or Google Fonts face (see index.html) is unavailable. */
 @font-face {
-  font-family: "Font Awesome 6 Brands";
+  font-family: "Font Awesome 6 Brands Local";
   font-style: normal;
   font-weight: 400;
   font-display: block;
   src: url("@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2") format("woff2");
 }
 
-/* Self-hosted icon-font backup under a distinct family name, listed as the
- * second choice on `.material-symbols-rounded`, so it's only fetched if the
- * primary Google Fonts face (see index.html) is unavailable. */
 @font-face {
   font-family: "Material Symbols Rounded Local";
   font-style: normal;
@@ -41,7 +41,7 @@
  * bar); theme classes live on <html>, set pre-paint by index.html's bootstrap. */
 
 :root {
-  --bg-color: #1b2e8b;
+  --bg-color: #1c2f8c;
   --text-color: #eee;
   color-scheme: dark;
 }
@@ -106,7 +106,7 @@ body.theme-ready {
   inset: 0;
   width: 100%;
   min-height: 100lvh;
-  background-image: url("/assets/otis-redding.png");
+  background-image: url("/assets/otis-redding.webp");
   opacity: 0.75;
   pointer-events: none;
   z-index: 0;
@@ -189,7 +189,7 @@ p {
 
 .fab {
   display: var(--fa-display, inline-block);
-  font-family: "Font Awesome 6 Brands";
+  font-family: "Font Awesome 6 Brands", "Font Awesome 6 Brands Local";
   font-style: normal;
   transition: color 0.5s, filter 0.5s;
 }

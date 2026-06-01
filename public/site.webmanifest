@@ -1,24 +1,43 @@
 {
-  "name": "Hi! I'm Shivang.",
-  "short_name": "Shivang",
-  "description": "Shivang P Swain, a 26 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs.",
-  "start_url": "/",
-  "scope": "/",
-  "display": "standalone",
   "background_color": "#1c2f8c",
-  "theme_color": "#1c2f8c",
+  "description": "I'm Shivang P Swain, a 26 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs.",
+  "display": "standalone",
   "icons": [
     {
-      "src": "/web-app-manifest-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "maskable",
+      "sizes": "96x96",
+      "src": "/assets/96.png",
+      "type": "image/png"
     },
     {
-      "src": "/web-app-manifest-512x512.png",
+      "purpose": "maskable",
+      "sizes": "192x192",
+      "src": "/assets/192.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "384x384",
+      "src": "/assets/384.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "src": "/assets/512.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "1024x1024",
+      "src": "/assets/1024.png",
+      "type": "image/png"
     }
-  ]
+  ],
+  "lang": "en",
+  "name": "Shivang P Swain",
+  "scope": "/",
+  "short_name": "Shivang",
+  "start_url": "/",
+  "theme_color": "#1c2f8c"
 }
