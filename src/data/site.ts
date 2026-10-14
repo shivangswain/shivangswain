@@ -14,8 +14,9 @@ export const site = {
 	company: "Goldman Sachs",
 	description:
 		"Shivang P Swain is a Senior Security Architect at Goldman Sachs, specialising in AI platform security, cloud infrastructure and container ecosystems.",
-	ogImage: "/assets/preview.png",
-	ogImageAlt: "A blue card with white text saying 'Hi, I'm Shivang.'",
+	ogImage: "/assets/og.png",
+	ogImageAlt:
+		"'Hi, I'm Shivang P Swain' in huge uppercase letters on a near-black card, with 'P Swain' in neon lime and a hand-drawn lime loop around the P.",
 	mastodon: "https://mastodon.social/@shivangswain",
 } as const;
 
