@@ -3,14 +3,19 @@
  * Monotone organisation marks. Every mark fills with `currentColor`, so it
  * recolours with the theme. Pass `decorative` when the organisation's name is
  * already printed next to the mark, so screen readers don't hear it twice.
+ * x/y/width/height position a mark nested inside another SVG.
  */
 interface Props {
 	name: "gs" | "airblack" | "jpm" | "comptia";
 	class?: string;
 	decorative?: boolean;
+	x?: number;
+	y?: number;
+	width?: number;
+	height?: number;
 }
 
-const { name, class: className, decorative = false } = Astro.props;
+const { name, class: className, decorative = false, x, y, width, height } = Astro.props;
 
 const marks = {
 	gs: {
@@ -41,6 +46,10 @@ const mark = marks[name];
 <svg
 	class:list={["logo", `logo-${name}`, className]}
 	viewBox={mark.viewBox}
+	x={x}
+	y={y}
+	width={width}
+	height={height}
 	role={decorative ? undefined : "img"}
 	aria-label={decorative ? undefined : mark.label}
 	aria-hidden={decorative ? "true" : undefined}

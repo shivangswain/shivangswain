@@ -38,6 +38,7 @@
 	--max: 92rem;
 	--radius: 1.25rem;
 	--header-h: 4.5rem;
+	--section-space: clamp(4.5rem, 11vw, 10rem);
 	--ease: cubic-bezier(0.65, 0.05, 0, 1);
 	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -514,14 +515,18 @@ textarea {
 }
 
 .hero-line {
+	--glyph: var(--fg);
+	--glyph-hover: var(--accent-text);
 	position: relative;
 	display: block;
 	white-space: nowrap;
+	user-select: none;
 }
 
 .hero-line-last {
+	--glyph: var(--accent-text);
+	--glyph-hover: var(--fg);
 	justify-self: end;
-	color: var(--accent-text);
 	background: linear-gradient(to top, var(--accent-mark) 0.22em, transparent 0.22em) 0 -0.04em / 100% 100% no-repeat;
 }
 
@@ -530,8 +535,23 @@ textarea {
 	width: 0.28em;
 }
 
+/* Each letter's real text is invisible and never changes, so its box (and
+ * hover area) stays put; ::after draws the visible glyph on top, and that is
+ * what squeezes on hover. Squeezing the real text would shrink the letter out
+ * from under a resting cursor, ending the hover and making it flicker. */
 .ch {
+	position: relative;
 	display: inline-block;
+	color: transparent;
+}
+
+.ch::after {
+	content: attr(data-ch);
+	position: absolute;
+	inset: 0;
+	text-align: center;
+	color: var(--glyph);
+	pointer-events: none;
 	transition:
 		font-weight 0.5s var(--ease),
 		font-stretch 0.5s var(--ease),
@@ -662,7 +682,13 @@ textarea {
 .section {
 	max-width: var(--max);
 	margin-inline: auto;
-	padding: clamp(4.5rem, 11vw, 10rem) var(--gutter);
+	/* Space above each section only, so neighbouring sections don't stack two
+	 * paddings; the last one closes with the same space before the footer. */
+	padding: var(--section-space) var(--gutter) 0;
+}
+
+.section:last-child {
+	padding-bottom: var(--section-space);
 }
 
 .section-head {
@@ -982,6 +1008,9 @@ textarea {
 }
 
 .cred {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	align-items: start;
@@ -990,6 +1019,26 @@ textarea {
 	border-radius: var(--radius);
 	background: var(--surface);
 	border: 1px solid var(--line);
+}
+
+/* Watermark badge: centred on the card's right edge so half of it shows,
+ * tilted, translucent, and behind the card's content. */
+.cred-badge {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	z-index: -1;
+	width: clamp(15rem, 62%, 25rem);
+	color: var(--accent-text);
+	opacity: 0.12;
+	translate: 50% -50%;
+	rotate: -14deg;
+	pointer-events: none;
+	transition: rotate 0.8s var(--ease-out), opacity 0.4s;
+}
+
+.cred-badge text {
+	font-family: var(--font-sans);
 }
 
 .cred-kind {
@@ -1300,14 +1349,10 @@ textarea {
 		transform: rotate(-12deg);
 	}
 
-	.hero-line .ch:hover {
+	.ch:hover::after {
 		font-weight: 250;
 		font-stretch: 75%;
-		color: var(--accent-text);
-	}
-
-	.hero-line-last .ch:hover {
-		color: var(--fg);
+		color: var(--glyph-hover);
 	}
 
 	.service-card:hover {
@@ -1320,6 +1365,11 @@ textarea {
 
 	.service-card:hover :is(.service-index, .service-body) {
 		color: var(--on-accent);
+	}
+
+	.cred:hover .cred-badge {
+		rotate: -4deg;
+		opacity: 0.18;
 	}
 
 	.chips li:hover {

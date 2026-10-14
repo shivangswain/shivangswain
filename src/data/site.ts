@@ -171,19 +171,19 @@ export const skills = [
 
 export const credentials = [
 	{
-		kind: "Degree",
-		title: "B.Tech, Information Technology",
-		org: "Veer Surendra Sai University of Technology",
-		meta: "2018 – 2022 · Burla, India",
-		href: "/degree",
-		cta: "View degree",
-	},
-	{
 		kind: "Certification",
 		title: "CompTIA Security+ CE",
 		org: "CompTIA",
 		meta: "Issued Jul 2024",
 		href: "/securityplus",
 		cta: "Verify on Credly",
+	},
+	{
+		kind: "Degree",
+		title: "B.Tech, Information Technology",
+		org: "Veer Surendra Sai University of Technology",
+		meta: "2018 – 2022 · Burla, India",
+		href: "/degree",
+		cta: "View degree",
 	},
 ] as const;
