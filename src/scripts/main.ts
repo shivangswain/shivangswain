@@ -14,7 +14,7 @@ const STORAGE_KEY = "theme";
 const THEME_COLOR: Record<Theme, string> = {
 	light: "#f4f4ed",
 	dark: "#0b0b0a",
-	blue: "#1b30c4",
+	blue: "#3333cc",
 };
 
 const THEME_NAME: Record<Theme, string> = {
@@ -136,10 +136,13 @@ function setupHeroWeight(): void {
 		for (const letter of letters) {
 			let near = 0;
 			if (pointer) {
+				// Height comes from the letter's line, which isn't transformed, so
+				// "P SWAIN" responds where it lands even while tucked away.
 				const box = letter.getBoundingClientRect();
+				const line = letter.closest(".hero-line")?.getBoundingClientRect() ?? box;
 				const distance = Math.hypot(
 					pointer.x - (box.left + box.width / 2),
-					pointer.y - (box.top + box.height / 2),
+					pointer.y - (line.top + line.height / 2),
 				);
 				const t = Math.max(0, 1 - distance / radius);
 				near = t * t * (3 - 2 * t); // smoothstep, for a soft falloff

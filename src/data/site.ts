@@ -16,7 +16,7 @@ export const site = {
 		"Shivang P Swain is a Senior Security Architect at Goldman Sachs, specialising in AI platform security, cloud infrastructure and container ecosystems.",
 	ogImage: "/assets/og.png",
 	ogImageAlt:
-		"'Hi, I'm Shivang P Swain' in huge uppercase letters on a near-black card, with 'P Swain' in neon lime and a hand-drawn lime loop around the P.",
+		"'Hi, I'm Shivang P Swain' in huge uppercase letters on a near-black card, with 'P Swain' in neon lime.",
 	mastodon: "https://mastodon.social/@shivangswain",
 } as const;
 
@@ -127,7 +127,7 @@ export const experience: readonly Job[] = [
 		roles: [{ title: "Front-End Developer", level: "Intern", start: "Jan 2022", end: "Jun 2022" }],
 	},
 	{
-		company: "JPMorgan Chase & Co.",
+		company: "JPMorganChase",
 		logo: "jpm",
 		roles: [{ title: "Software Engineer", level: "Intern", start: "Jun 2020", end: "Jul 2020" }],
 	},

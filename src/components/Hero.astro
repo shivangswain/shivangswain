@@ -2,8 +2,10 @@
 import Icon from "./Icon.astro";
 import { site } from "../data/site";
 
-// Each letter is its own span for the staggered entrance.
-// They're hidden from assistive tech; the heading's real text is the sr-only span.
+// Each letter is its own span for the staggered entrance and the cursor weight
+// effect. They're hidden from assistive tech; the heading's real text is the
+// sr-only span. On hover devices "P SWAIN" waits behind "SHIVANG" and drops
+// down when the name is hovered (CSS only, see .hero-line-last).
 const letters = (word: string) => [...word];
 ---
 
@@ -26,13 +28,9 @@ const letters = (word: string) => [...word];
 			{letters(site.firstName).map((ch) => <span class="ch">{ch}</span>)}
 		</span>
 		<span class="hero-line hero-line-last" aria-hidden="true">
-			{letters(site.lastName).map((ch) => (ch === " " ? <span class="ch-gap" /> : <span class="ch">{ch}</span>))}
-			<svg class="scribble" viewBox="0 0 200 170" fill="none" aria-hidden="true" focusable="false">
-				<path
-					pathLength="1"
-					d="M44 128C10 84 38 20 104 13c62-6 92 44 82 88-10 44-60 62-104 52-40-9-60-48-46-82 14-32 58-50 118-42"
-				></path>
-			</svg>
+			<span class="hero-line-inner">
+				{letters(site.lastName).map((ch) => (ch === " " ? <span class="ch-gap" /> : <span class="ch">{ch}</span>))}
+			</span>
 		</span>
 	</h1>
 

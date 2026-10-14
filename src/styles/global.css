@@ -1,7 +1,7 @@
 /* ==========================================================================
    Shivang P Swain: global styles
-   High-contrast neon on ink, with three schemes: dark (default), light, and
-   electric blue. The scheme lives on <html data-theme>, set before first paint
+   High-contrast and web-safe, with three schemes: neon lime on ink (dark,
+   the default), blue on paper (light), and lime on electric blue. The scheme lives on <html data-theme>, set before first paint
    by src/scripts/theme-init.js; without JavaScript the OS preference decides.
    Motion is CSS-only (scroll-driven where supported) and fully disabled for
    prefers-reduced-motion.
@@ -10,7 +10,8 @@
 /* ---------- Tokens ---------- */
 
 :root {
-	--lime: #d2ff00;
+	--lime: #ccff00;
+	--blue: #3333cc;
 	--ink: #0b0b0a;
 	--paper: #f4f4ed;
 
@@ -23,14 +24,10 @@
 	--muted: light-dark(#4f5148, #a6a89c);
 	--line: light-dark(rgb(11 11 10 / 0.16), rgb(244 244 237 / 0.14));
 	--line-strong: light-dark(rgb(11 11 10 / 0.5), rgb(244 244 237 / 0.42));
-	--accent: var(--lime);
-	--on-accent: var(--ink);
-	/* Neon reads as text on dark grounds only; on paper, accents become ink
-	 * with a lime highlighter stroke instead. */
-	--accent-text: light-dark(var(--ink), var(--lime));
-	--accent-mark: light-dark(var(--lime), transparent);
-	/* Edge for lime shapes: an ink keyline on paper, invisible elsewhere. */
-	--accent-edge: light-dark(var(--ink), var(--lime));
+	/* Neon lime only reads on dark grounds, so paper swaps it for blue. */
+	--accent: light-dark(var(--blue), var(--lime));
+	--on-accent: light-dark(var(--paper), var(--ink));
+	--accent-text: var(--accent);
 	--focus: light-dark(var(--ink), var(--lime));
 
 	--font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
@@ -39,6 +36,10 @@
 	--radius: 1.25rem;
 	--header-h: 4.5rem;
 	--section-space: clamp(4.5rem, 11vw, 10rem);
+	/* How much accent the footer gradient reaches, kept low enough that the
+	 * footer's small text holds 4.5:1 against it. */
+	--footer-glow-mid: 24%;
+	--footer-glow-end: 40%;
 	--ease: cubic-bezier(0.65, 0.05, 0, 1);
 	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -53,11 +54,14 @@
 
 :root[data-theme="blue"] {
 	color-scheme: dark;
-	--bg: #1b30c4;
-	--surface: #2238d2;
-	--muted: #cdd3f7;
+	--bg: var(--blue);
+	--surface: #3d3dd4;
+	--muted: #dadaf7;
 	--line: rgb(244 244 237 / 0.22);
 	--line-strong: rgb(244 244 237 / 0.55);
+	/* Lime over blue turns teal quickly, so the footer glow stays gentler. */
+	--footer-glow-mid: 12%;
+	--footer-glow-end: 20%;
 }
 
 /* ---------- Base ---------- */
@@ -167,7 +171,7 @@ textarea {
 
 /* ---------- Type helpers ---------- */
 
-/* The serif italic accent: neon on dark grounds, a highlighter stroke on paper. */
+/* The serif italic accent: lime on dark grounds, blue on paper. */
 .accent {
 	font-family: var(--font-serif);
 	font-style: italic;
@@ -175,16 +179,6 @@ textarea {
 	font-stretch: 100%;
 	letter-spacing: 0;
 	color: var(--accent-text);
-	/* Instrument Serif's content box ends ~0.31em below the baseline, so this
-	 * band straddles the baseline like a highlighter stroke. */
-	background: linear-gradient(
-		to top,
-		transparent 0.2em,
-		var(--accent-mark) 0.2em 0.5em,
-		transparent 0.5em
-	);
-	-webkit-box-decoration-break: clone;
-	box-decoration-break: clone;
 	padding-inline: 0.02em 0.04em;
 }
 
@@ -278,7 +272,6 @@ textarea {
 .btn-neon {
 	background: var(--accent);
 	color: var(--on-accent);
-	border-color: var(--accent-edge);
 }
 
 .btn-ghost {
@@ -471,7 +464,6 @@ textarea {
 	height: 0.55rem;
 	border-radius: 50%;
 	background: var(--accent);
-	box-shadow: 0 0 0 1px var(--accent-edge);
 }
 
 .pulse::after {
@@ -535,7 +527,45 @@ textarea {
 	--glyph: var(--accent-text);
 	--glyph-near: var(--fg);
 	justify-self: end;
-	background: linear-gradient(to top, var(--accent-mark) 0.22em, transparent 0.22em) 0 -0.04em / 100% 100% no-repeat;
+}
+
+.hero-line-inner {
+	display: block;
+}
+
+/* With a mouse, "P SWAIN" waits tucked up behind "SHIVANG" and drops down
+ * while the name is hovered. The title ignores the pointer, so only the
+ * letters of "SHIVANG" (and then the revealed "P SWAIN") count as hovering
+ * it; the clip hides the line above its own top edge, i.e. behind SHIVANG.
+ * Touch screens, which can't hover, always show the full name. */
+@media (hover: hover) and (pointer: fine) {
+	.hero-title {
+		pointer-events: none;
+	}
+
+	.hero-line {
+		pointer-events: auto;
+	}
+
+	.hero-line-last {
+		clip-path: inset(0 -1em -1em -1em);
+		pointer-events: none;
+	}
+
+	.hero-line-inner {
+		transform: translateY(-100%);
+		transition: transform 0.55s var(--ease);
+	}
+
+	.hero-title:hover .hero-line-last {
+		pointer-events: auto;
+	}
+
+	.hero-title:hover .hero-line-inner {
+		transform: none;
+		transition-timing-function: var(--ease-out);
+		transition-duration: 0.75s;
+	}
 }
 
 .ch-gap {
@@ -555,28 +585,6 @@ textarea {
 	transition:
 		font-variation-settings 0.45s var(--ease-out),
 		color 0.45s var(--ease-out);
-}
-
-.scribble {
-	position: absolute;
-	left: -0.3em;
-	top: 50%;
-	width: 1.38em;
-	translate: 0 -50%;
-	overflow: visible;
-	pointer-events: none;
-}
-
-.scribble path {
-	stroke: var(--accent);
-	stroke-width: 7;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-}
-
-/* On paper the lime scribble gets an ink keyline to hold its contrast. */
-.scribble path {
-	filter: drop-shadow(0 0 0.6px var(--accent-edge)) drop-shadow(0 0 0.6px var(--accent-edge));
 }
 
 .hero-foot {
@@ -761,11 +769,14 @@ textarea {
 	list-style: none;
 }
 
+/* Each card spans four rows of the list's grid (index, title, body, tags) and
+ * shares them through subgrid, so titles line up whatever the body length. */
 .service-card {
-	display: flex;
-	flex-direction: column;
-	gap: 1.25rem;
-	min-height: 25rem;
+	display: grid;
+	grid-row: span 4;
+	grid-template-rows: subgrid;
+	row-gap: 1.25rem;
+	align-content: start;
 	padding: clamp(1.5rem, 2.5vw, 2.25rem);
 	border: 1px solid var(--line);
 	border-radius: var(--radius);
@@ -779,6 +790,7 @@ textarea {
 }
 
 .service-index {
+	margin-bottom: clamp(0.75rem, 2vw, 1.75rem);
 	font-family: var(--font-mono);
 	font-size: 0.8125rem;
 	color: var(--muted);
@@ -786,7 +798,6 @@ textarea {
 }
 
 .service-title {
-	margin-top: auto;
 	font-weight: 800;
 	font-stretch: 112%;
 	font-size: clamp(1.6rem, 2.4vw, 2.1rem);
@@ -804,6 +815,9 @@ textarea {
 .tags {
 	display: flex;
 	flex-wrap: wrap;
+	/* Don't stretch to a taller neighbour's subgrid row. */
+	align-self: start;
+	align-items: flex-start;
 	gap: 0.4rem;
 	margin: 0;
 	padding: 0;
@@ -1021,23 +1035,23 @@ textarea {
 }
 
 /* Watermark badge: centred on the card's right edge so half of it shows,
- * tilted, translucent, and behind the card's content. */
+ * tilted, translucent, and behind the card's content. The badge artwork is a
+ * mask, so it paints in the text colour: white on dark themes, ink on paper. */
 .cred-badge {
 	position: absolute;
 	top: 50%;
 	right: 0;
 	z-index: -1;
 	width: clamp(15rem, 62%, 25rem);
-	color: var(--accent-text);
-	opacity: 0.12;
+	aspect-ratio: 800 / 730;
+	background: var(--fg);
+	-webkit-mask: url("../assets/securityplus-badge.svg") center / contain no-repeat;
+	mask: url("../assets/securityplus-badge.svg") center / contain no-repeat;
+	opacity: 0.1;
 	translate: 50% -50%;
 	rotate: -14deg;
 	pointer-events: none;
 	transition: rotate 0.8s var(--ease-out), opacity 0.4s;
-}
-
-.cred-badge text {
-	font-family: var(--font-sans);
 }
 
 .cred-kind {
@@ -1249,9 +1263,15 @@ textarea {
 /* ---------- Footer ---------- */
 
 .site-footer {
-	padding: 0 var(--gutter) 1.25rem;
+	padding: clamp(2rem, 5vw, 4rem) var(--gutter) 1.25rem;
 	overflow: clip;
 	container-type: inline-size;
+	background: linear-gradient(
+		to bottom,
+		transparent,
+		color-mix(in oklab, var(--accent) var(--footer-glow-mid), var(--bg)) 70%,
+		color-mix(in oklab, var(--accent) var(--footer-glow-end), var(--bg))
+	);
 }
 
 .footer-giant {
@@ -1264,9 +1284,20 @@ textarea {
 	text-align: center;
 	text-transform: uppercase;
 	white-space: nowrap;
-	color: var(--accent-text);
-	background: linear-gradient(to top, var(--accent-mark) 0.3em, transparent 0.3em);
+	color: var(--fg);
 	user-select: none;
+}
+
+/* A solid accent band behind the bottom of the letters, like a highlighter.
+ * The inline box ends ~0.3em below the baseline, so the band starts 0.28em
+ * up from there and straddles the baseline. */
+.footer-giant span {
+	background: linear-gradient(
+		to top,
+		transparent 0.28em,
+		var(--accent) 0.28em 0.52em,
+		transparent 0.52em
+	);
 }
 
 .footer-row {
@@ -1282,7 +1313,11 @@ textarea {
 	font-size: 0.75rem;
 	letter-spacing: 0.06em;
 	text-transform: uppercase;
-	color: var(--muted);
+	color: var(--fg);
+}
+
+.footer-row .clock {
+	color: inherit;
 }
 
 .footer-row a {
@@ -1403,7 +1438,7 @@ textarea {
 		scroll-behavior: smooth;
 	}
 
-	/* Hero entrance: letters rise in, then the scribble draws itself. */
+	/* Hero entrance: the letters rise in. */
 	.hero-line .ch {
 		animation: rise 0.9s var(--ease-out) both;
 	}
@@ -1426,12 +1461,6 @@ textarea {
 	.hero-meta,
 	.hero-foot {
 		animation: fade-up 0.9s var(--ease-out) 0.35s both;
-	}
-
-	.scribble path {
-		stroke-dasharray: 1;
-		stroke-dashoffset: 1;
-		animation: draw 1.1s var(--ease) 0.75s forwards;
 	}
 
 	/* Scroll-driven reveals; browsers without view timelines just show content. */
@@ -1479,12 +1508,6 @@ textarea {
 	from {
 		opacity: 0;
 		transform: translateY(2rem);
-	}
-}
-
-@keyframes draw {
-	to {
-		stroke-dashoffset: 0;
 	}
 }
 
@@ -1558,10 +1581,6 @@ textarea {
 	.facts,
 	.form-row {
 		grid-template-columns: minmax(0, 1fr);
-	}
-
-	.service-card {
-		min-height: 0;
 	}
 
 	.footer-row {
