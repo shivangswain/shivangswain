@@ -2,7 +2,7 @@
  * Progressive enhancements. The page is complete without JavaScript: content
  * is never hidden behind it, scroll effects are pure CSS, and the contact form
  * falls back to a plain mailto: submit. This adds the theme switcher, the
- * Bengaluru clock and the pre-filled email draft.
+ * hero name's cursor effect, the Bengaluru clock and the pre-filled email draft.
  */
 
 type Theme = "light" | "dark" | "blue";
@@ -111,6 +111,60 @@ function setupClock(): void {
 	setInterval(tick, 10_000);
 }
 
+/*
+ * Hero name: letters near the cursor thin out and shift colour, weighted by
+ * distance, then ease back as it moves away (after Julian Fella's variable
+ * font weight hover). Weight follows distance rather than :hover, so a resting
+ * cursor never flips a letter on and off as its width changes. Fine pointers
+ * only, and off for reduced motion.
+ */
+function setupHeroWeight(): void {
+	const hero = document.querySelector<HTMLElement>(".hero");
+	const letters = [...document.querySelectorAll<HTMLElement>(".hero-line .ch")];
+	if (!hero || letters.length === 0) return;
+	if (!matchMedia("(hover: hover) and (pointer: fine)").matches || reducedMotion.matches) return;
+
+	const HEAVY = 900;
+	const LIGHT = 250;
+	let pointer: { x: number; y: number } | null = null;
+	let frame = 0;
+
+	const update = (): void => {
+		frame = 0;
+		// Reach scales with the type, so about three letters respond at once.
+		const radius = parseFloat(getComputedStyle(letters[0]).fontSize) * 1.4;
+		for (const letter of letters) {
+			let near = 0;
+			if (pointer) {
+				const box = letter.getBoundingClientRect();
+				const distance = Math.hypot(
+					pointer.x - (box.left + box.width / 2),
+					pointer.y - (box.top + box.height / 2),
+				);
+				const t = Math.max(0, 1 - distance / radius);
+				near = t * t * (3 - 2 * t); // smoothstep, for a soft falloff
+			}
+			letter.style.setProperty("--wght", String(Math.round(HEAVY - (HEAVY - LIGHT) * near)));
+			letter.style.setProperty("--near", `${Math.round(near * 100)}%`);
+		}
+	};
+
+	const schedule = (): void => {
+		if (!frame) frame = requestAnimationFrame(update);
+	};
+
+	hero.addEventListener("pointermove", (event) => {
+		pointer = { x: event.clientX, y: event.clientY };
+		schedule();
+	});
+	hero.addEventListener("pointerleave", () => {
+		pointer = null;
+		schedule();
+	});
+	// Letters move under a resting cursor while the page scrolls.
+	addEventListener("scroll", () => pointer && schedule(), { passive: true });
+}
+
 /* Compose a pre-filled email draft from the form. Nothing is sent or stored by this site. */
 function setupContactForm(): void {
 	const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
@@ -129,5 +183,6 @@ function setupContactForm(): void {
 }
 
 setupTheme();
+setupHeroWeight();
 setupClock();
 setupContactForm();

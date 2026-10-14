@@ -176,7 +176,7 @@ I am proficient in the following tools & technologies:
 
 You can find me on:
 
-<a href='https://shiva.ng'><img width='48' height='48' src='./icons/site.png' alt="website">
+<a href='https://shiva.ng'><picture><source media="(prefers-color-scheme: dark)" srcset="./icons/site.png"><img width='48' height='48' src='./icons/site-light.png' alt="website"/></picture></a>
 <a href='https://shiva.ng/github'><img width='48' height='48' src="./icons/github.png" alt="github"/></a>
 <a href='https://shiva.ng/linkedin'><img width='48' height='48' src="./icons/linkedin.png" alt="linkedin"/></a>
 <a href='https://shiva.ng/instagram'><img width='48' height='48' src="./icons/instagram.png" alt="instagram"/></a>

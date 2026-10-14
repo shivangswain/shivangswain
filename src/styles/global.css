@@ -492,8 +492,11 @@ textarea {
 
 .hero-title {
 	display: grid;
-	/* Hug the widest line, so "P SWAIN" right-aligns under the end of "SHIVANG". */
+	/* As wide as "SHIVANG" at rest (~5.2em), so "P SWAIN" right-aligns under
+	 * its end; a fixed width keeps one line steady while the cursor thins the
+	 * other's letters. */
 	align-self: flex-start;
+	width: min(100%, 5.2em);
 	font-weight: 900;
 	font-stretch: 125%;
 	text-transform: uppercase;
@@ -520,14 +523,18 @@ textarea {
 }
 
 .hero-line {
+	/* Letter colour at rest and fully under the cursor (see .ch below). */
+	--glyph: var(--fg);
+	--glyph-near: var(--accent-text);
 	position: relative;
 	display: block;
 	white-space: nowrap;
 }
 
 .hero-line-last {
+	--glyph: var(--accent-text);
+	--glyph-near: var(--fg);
 	justify-self: end;
-	color: var(--accent-text);
 	background: linear-gradient(to top, var(--accent-mark) 0.22em, transparent 0.22em) 0 -0.04em / 100% 100% no-repeat;
 }
 
@@ -536,8 +543,18 @@ textarea {
 	width: 0.28em;
 }
 
+/* Cursor proximity (src/scripts/main.ts) sets --wght and --near per letter.
+ * Weight goes through font-variation-settings because Safari interpolates
+ * that smoothly but snaps font-weight; wdth is restated so it stays wide. */
 .ch {
 	display: inline-block;
+	font-variation-settings:
+		"wght" var(--wght, 900),
+		"wdth" 125;
+	color: color-mix(in oklab, var(--glyph-near) var(--near, 0%), var(--glyph));
+	transition:
+		font-variation-settings 0.45s var(--ease-out),
+		color 0.45s var(--ease-out);
 }
 
 .scribble {
