@@ -364,7 +364,7 @@ textarea {
 	width: 2.5rem;
 	height: 2.5rem;
 	padding: 0;
-	border: 1.5px solid var(--fg);
+	border: 0;
 	border-radius: 0.65rem;
 	background: transparent;
 	cursor: pointer;
@@ -566,7 +566,8 @@ textarea {
 	width: 0.28em;
 }
 
-/* Cursor proximity (src/scripts/main.ts) sets --wght and --near per letter.
+/* Cursor proximity (src/scripts/main.ts) sets --wght and --near per letter,
+ * for the hero name and the footer name alike.
  * Weight goes through font-variation-settings because Safari interpolates
  * that smoothly but snaps font-weight; wdth is restated so it stays wide. */
 .ch {
@@ -1279,12 +1280,16 @@ textarea {
 	white-space: nowrap;
 	color: var(--fg);
 	user-select: none;
+	/* Same cursor weight effect as the hero name (see .ch); the colour holds,
+	 * since an accent tint would vanish into the gradient. */
+	--glyph: var(--fg);
+	--glyph-near: var(--fg);
 }
 
 /* A band in the page background colour behind the bottom of the letters,
  * cutting through the gradient like a highlighter. The inline box ends ~0.3em
  * below the baseline, so the band starts 0.28em up and straddles it. */
-.footer-giant span {
+.footer-name {
 	background: linear-gradient(
 		to top,
 		transparent 0.28em,
@@ -1294,7 +1299,7 @@ textarea {
 }
 
 /* The row sits on near-solid accent, so it takes the on-accent colour; the
- * token overrides carry that through to the clock and theme toggle too. */
+ * token overrides carry that through to the clock and links too. */
 .footer-row {
 	--fg: var(--on-accent);
 	--bg: var(--accent);

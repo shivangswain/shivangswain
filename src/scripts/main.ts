@@ -2,7 +2,8 @@
  * Progressive enhancements. The page is complete without JavaScript: content
  * is never hidden behind it, scroll effects are pure CSS, and the contact form
  * falls back to a plain mailto: submit. This adds the theme switcher, the
- * hero name's cursor effect, the Bengaluru clock and the pre-filled email draft.
+ * cursor weight effect on the big names, the Bengaluru clock and the
+ * pre-filled email draft.
  */
 
 type Theme = "light" | "dark" | "blue";
@@ -112,16 +113,20 @@ function setupClock(): void {
 }
 
 /*
- * Hero name: letters near the cursor thin out and shift colour, weighted by
- * distance, then ease back as it moves away (after Julian Fella's variable
- * font weight hover). Weight follows distance rather than :hover, so a resting
- * cursor never flips a letter on and off as its width changes. Fine pointers
- * only, and off for reduced motion.
+ * Big names (hero and footer): letters near the cursor thin out and shift
+ * colour, weighted by distance, then ease back as it moves away (after Julian
+ * Fella's variable font weight hover). Weight follows distance rather than
+ * :hover, so a resting cursor never flips a letter on and off as its width
+ * changes. `zone` is the area that tracks the cursor; `lineOf` gives the box
+ * whose middle is each letter's height. Fine pointers only, off for reduced
+ * motion.
  */
-function setupHeroWeight(): void {
-	const hero = document.querySelector<HTMLElement>(".hero");
-	const letters = [...document.querySelectorAll<HTMLElement>(".hero-line .ch")];
-	if (!hero || letters.length === 0) return;
+function setupWeightHover(
+	zone: HTMLElement | null,
+	letters: HTMLElement[],
+	lineOf: (letter: HTMLElement) => Element | null,
+): void {
+	if (!zone || letters.length === 0) return;
 	if (!matchMedia("(hover: hover) and (pointer: fine)").matches || reducedMotion.matches) return;
 
 	const HEAVY = 900;
@@ -136,10 +141,8 @@ function setupHeroWeight(): void {
 		for (const letter of letters) {
 			let near = 0;
 			if (pointer) {
-				// Height comes from the letter's line, which isn't transformed, so
-				// "P SWAIN" responds where it lands even while tucked away.
 				const box = letter.getBoundingClientRect();
-				const line = letter.closest(".hero-line")?.getBoundingClientRect() ?? box;
+				const line = lineOf(letter)?.getBoundingClientRect() ?? box;
 				const distance = Math.hypot(
 					pointer.x - (box.left + box.width / 2),
 					pointer.y - (line.top + line.height / 2),
@@ -156,11 +159,11 @@ function setupHeroWeight(): void {
 		if (!frame) frame = requestAnimationFrame(update);
 	};
 
-	hero.addEventListener("pointermove", (event) => {
+	zone.addEventListener("pointermove", (event) => {
 		pointer = { x: event.clientX, y: event.clientY };
 		schedule();
 	});
-	hero.addEventListener("pointerleave", () => {
+	zone.addEventListener("pointerleave", () => {
 		pointer = null;
 		schedule();
 	});
@@ -186,6 +189,17 @@ function setupContactForm(): void {
 }
 
 setupTheme();
-setupHeroWeight();
+// Hero letters take their height from their line, which isn't transformed, so
+// "P SWAIN" responds where it will land even while tucked behind "SHIVANG".
+setupWeightHover(
+	document.querySelector(".hero"),
+	[...document.querySelectorAll<HTMLElement>(".hero-line .ch")],
+	(letter) => letter.closest(".hero-line"),
+);
+setupWeightHover(
+	document.querySelector(".site-footer"),
+	[...document.querySelectorAll<HTMLElement>(".footer-giant .ch")],
+	(letter) => letter.closest(".footer-giant"),
+);
 setupClock();
 setupContactForm();

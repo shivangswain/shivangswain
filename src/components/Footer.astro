@@ -1,17 +1,17 @@
 ---
-import ThemeToggle from "./ThemeToggle.astro";
 import { site } from "../data/site";
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-	<p class="footer-giant" aria-hidden="true"><span>{site.firstName}</span></p>
+	<p class="footer-giant" aria-hidden="true">
+		<span class="footer-name">{[...site.firstName].map((ch) => <span class="ch">{ch}</span>)}</span>
+	</p>
 	<div class="footer-row">
 		<p>© {year} {site.name}</p>
 		<p class="clock">Bengaluru <time data-clock>--:--</time> IST</p>
 		<p><a href="/resume" target="_blank" rel="noopener">Résumé</a></p>
 		<p><a href="/#top">Back to top</a></p>
-		<ThemeToggle />
 	</div>
 </footer>
