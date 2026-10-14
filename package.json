@@ -5,6 +5,7 @@
     "@fontsource/playfair-display": "latest",
     "@fortawesome/fontawesome-free": "latest",
     "@material-symbols/font-400": "latest",
+    "@types/node": "latest",
     "typescript": "latest",
     "vite": "latest"
   },

@@ -37,7 +37,7 @@ function systemTheme(): Theme {
 }
 
 function setupThemeToggle(): void {
-	const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+	const themeColor = document.querySelector('meta[name="theme-color"]');
 	const themeToggle = document.getElementById("theme-toggle") as HTMLButtonElement | null;
 	const themeIcon = themeToggle?.querySelector("i") as HTMLElement | null;
 	if (!themeToggle || !themeIcon) return;

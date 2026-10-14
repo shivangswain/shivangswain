@@ -7,7 +7,8 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url("@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2") format("woff2");
+  src: url("@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2")
+    format("woff2");
 }
 
 @font-face {
@@ -26,7 +27,8 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2") format("woff2");
+  src: url("@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2")
+    format("woff2");
 }
 
 @font-face {
@@ -34,15 +36,19 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("@material-symbols/font-400/material-symbols-rounded.woff2") format("woff2");
+  src: url("@material-symbols/font-400/material-symbols-rounded.woff2")
+    format("woff2");
 }
 
 /* Design tokens. `color-scheme` hints native UI (controls, scrollbars, address
- * bar); theme classes live on <html>, set pre-paint by index.html's bootstrap. */
+ * bar); theme classes live on <html>, set pre-paint by index.html's bootstrap.
+ * --line is the standard hairline used by cards, chips, inputs, and the timeline. */
 
 :root {
   --bg-color: #1c2f8c;
   --text-color: #eee;
+  --line: color-mix(in srgb, var(--text-color) 25%, transparent);
+  --line-strong: color-mix(in srgb, var(--text-color) 55%, transparent);
   color-scheme: dark;
 }
 
@@ -78,16 +84,30 @@ body {
   margin: 0;
   background: var(--bg-color);
   color: var(--text-color);
-  font-family: "Open Runde", system-ui, -apple-system, "Segoe UI", sans-serif;
-  filter: opacity(0.8);
-  justify-content: center;
+  font-family:
+    "Open Runde",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* The muted look used to be `filter: opacity(0.8)` on <body>, but a filtered
+ * ancestor becomes the containing block for position:fixed — which would make
+ * the grain overlay and dot-nav scroll away on a long page. Opacity is applied
+ * to the fixed-free subtrees instead. */
+main,
+.section-nav {
+  opacity: 0.8;
 }
 
 /* Colour transitions enabled post-paint via .theme-ready (set by themeToggle.ts)
  * so the first frame doesn't animate from the pre-themed colours. */
 
 body.theme-ready {
-  transition: background-color 0.5s, color 0.5s;
+  transition:
+    background-color 0.5s,
+    color 0.5s;
 }
 
 :focus {
@@ -98,6 +118,11 @@ body.theme-ready {
   outline: 2px solid var(--text-color);
   outline-offset: 4px;
   border-radius: 2px;
+}
+
+::selection {
+  background: var(--text-color);
+  color: var(--bg-color);
 }
 
 /* Decorative grain overlay; non-interactive. lvh avoids mobile address-bar jumpiness. */
@@ -112,25 +137,24 @@ body.theme-ready {
   z-index: 0;
 }
 
-/* Layout */
+/* Layout — full-height panels stacked vertically; content column centred. */
 
 main {
   position: relative;
   z-index: 1;
   /* above the noise overlay */
-  display: grid;
-  grid-template-rows: 1fr auto;
-  min-height: 100vh;
-  justify-content: center;
 }
 
-.content {
+.panel {
   display: grid;
   place-items: center;
-  margin: 5rem;
+  min-height: 100svh;
+  padding: 6rem 5rem;
+  position: relative;
 }
 
 .center {
+  width: 100%;
   max-width: 1080px;
 }
 
@@ -145,9 +169,25 @@ h1 {
 }
 
 p {
-  margin-bottom: 2.5rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.hero .intro {
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  margin: 0 0 2.5rem;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 2.75rem;
+  line-height: 1.15;
+}
+
+.section-lede {
+  max-width: 46rem;
+  margin: 0 0 3rem;
+  line-height: 1.9rem;
 }
 
 /* Collapsed until the H1 is hovered (see hover block below). */
@@ -165,7 +205,9 @@ p {
   transition: color 0.5s;
 }
 
-.go-home {
+/* Shared grow-underline treatment for inline text links. */
+.go-home,
+.inline-link {
   padding-bottom: 1px;
   color: var(--text-color);
   text-decoration: inherit;
@@ -173,16 +215,10 @@ p {
   background-position: 0 100%;
   background-size: 0% 2px;
   background-repeat: no-repeat;
-  transition: background-position 0s 0.5s, background-size 0.5s, color 0.5s;
-}
-
-/* Inline Goldman Sachs logos */
-
-.gs {
-  height: 1.15rem;
-  fill: var(--text-color);
-  vertical-align: text-middle;
-  transition: fill 0.5s;
+  transition:
+    background-position 0s 0.5s,
+    background-size 0.5s,
+    color 0.5s;
 }
 
 /* Icon fonts (Font Awesome brands + Material Symbols) */
@@ -191,7 +227,9 @@ p {
   display: var(--fa-display, inline-block);
   font-family: "Font Awesome 6 Brands", "Font Awesome 6 Brands Local";
   font-style: normal;
-  transition: color 0.5s, filter 0.5s;
+  transition:
+    color 0.5s,
+    filter 0.5s;
 }
 
 .fa-github::before {
@@ -204,7 +242,6 @@ p {
 
 .fa-instagram::before {
   content: "\f16d";
-
 }
 
 .fa-bluesky::before {
@@ -214,12 +251,14 @@ p {
 
 /* Instagram's brand gradient applied to the glyph via text clip */
 .fa-instagram {
-  background: radial-gradient(circle at 30% 110%,
-      #ffdb8b 0%,
-      #ee653d 25%,
-      #d42e81 50%,
-      #a237b6 75%,
-      #3e57bc 100%);
+  background: radial-gradient(
+    circle at 30% 110%,
+    #ffdb8b 0%,
+    #ee653d 25%,
+    #d42e81 50%,
+    #a237b6 75%,
+    #3e57bc 100%
+  );
   background-clip: text;
 }
 
@@ -253,14 +292,396 @@ p {
   line-height: 2.5rem;
 }
 
+/* Hero panel — keeps the original centred composition plus a scroll cue. */
+
+.hero .center {
+  text-align: left;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  translate: -50% 0;
+  color: var(--text-color);
+  opacity: 0.6;
+  transition: opacity 0.5s;
+}
+
+.scroll-cue i {
+  font-size: 2rem;
+  animation: cue-bob 2.4s ease-in-out infinite;
+}
+
+@keyframes cue-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(0.5rem);
+  }
+}
+
+/* Section dot-nav (fixed, desktop only). */
+
+.section-nav {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 2;
+  display: grid;
+  gap: 1rem;
+}
+
+.section-nav a {
+  display: grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+}
+
+.section-nav a span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s,
+    transform 0.3s;
+}
+
+.section-nav a.active span {
+  background: var(--text-color);
+  border-color: var(--text-color);
+  transform: scale(1.25);
+}
+
+/* Scroll-reveal. Content is only hidden when JS is present (html.js, set by the
+ * inline bootstrap), so a JS-off visitor still sees everything. --i staggers
+ * siblings within a section. */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(1.75rem);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+.js .reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* About — definition-list facts in a responsive row. */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin: 0;
+}
+
+.fact {
+  border-top: 1px solid var(--line);
+  padding-top: 1.25rem;
+}
+
+.fact dt {
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+.fact dd {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  line-height: 1.6rem;
+}
+
+/* Experience — each role group is anchored by its monotone company logo in a
+ * fixed left rail. Logos carry no background; they recolour with the theme via
+ * fill. Heights are tuned per-logo so the differing marks read at one weight. */
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 3rem;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 3.6rem 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* Logo rail: marks are right-aligned so each sits the same distance from its
+ * role text regardless of the logo's intrinsic width, and vertically centred
+ * on the first heading line. No background — they sit straight on the grain,
+ * each tight-cropped via its viewBox so the marks read at one optical weight. */
+.entry-marker {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 2rem;
+}
+
+.marker {
+  width: auto;
+  fill: var(--text-color);
+  transition: fill 0.5s;
+}
+
+.marker-gs {
+  height: 1.5rem;
+}
+
+.marker-airblack {
+  height: 1.35rem;
+}
+
+.marker-jpm {
+  height: 1.2rem;
+}
+
+.entry-body {
+  display: grid;
+  gap: 1.5rem;
+  padding-top: 0.05rem;
+}
+
+.role h3 {
+  margin: 0 0 0.25rem;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+.entry-meta {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.65;
+}
+
+/* Organisation marks — always monotone via fill/color: var(--text-color). */
+
+.org-mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+svg.comptia {
+  height: 1.375rem;
+  fill: var(--text-color);
+  transition: fill 0.5s;
+}
+
+/* Skills — grouped hairline chips. */
+
+.skill-group {
+  margin-bottom: 2.5rem;
+}
+
+.skill-group:last-child {
+  margin-bottom: 0;
+}
+
+.skill-group h3 {
+  margin: 0 0 1rem;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+}
+
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.chips li {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+  transition:
+    border-color 0.3s,
+    background-color 0.3s;
+}
+
+/* Education & certification cards. */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  transition:
+    border-color 0.3s,
+    transform 0.3s;
+}
+
+.card-icon {
+  font-size: 2.25rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  margin: 0 0 0.5rem;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 1.375rem;
+  line-height: 1.3;
+}
+
+.card-org {
+  margin: 0 0 0.25rem;
+  font-size: 1.0625rem;
+  line-height: 1.5rem;
+}
+
+.card-meta {
+  margin: 0 0 1.5rem;
+  font-size: 0.9375rem;
+  opacity: 0.65;
+}
+
+.card-link {
+  display: inline-block;
+  padding-bottom: 1px;
+  color: var(--text-color);
+  font-size: 1rem;
+  text-decoration: inherit;
+  background-image: linear-gradient(var(--text-color) 0 0);
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  transition:
+    background-position 0s 0.5s,
+    background-size 0.5s;
+}
+
+.card-link i,
+.resume i {
+  margin: auto auto 0.25rem auto;
+  transform: rotate(-45deg);
+  vertical-align: middle;
+  font-size: 1.25rem;
+}
+
+/* Contact form — hairline inputs on the page background; submission builds a
+ * mailto: draft client-side (no backend, nothing stored). */
+
+.contact-form {
+  max-width: 46rem;
+  margin-bottom: 3.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
+.contact-form label span {
+  display: block;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 1.0625rem;
+  line-height: 1.5rem;
+  transition: border-color 0.3s;
+  resize: vertical;
+}
+
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: none;
+  border-color: var(--text-color);
+}
+
+.contact-form button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 1.0625rem;
+  padding: 0.75rem 1.75rem;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    border-color 0.3s;
+}
+
+.contact-form button i {
+  font-size: 1.25rem;
+}
+
+.form-hint {
+  margin: 1rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  opacity: 0.55;
+}
+
+.contact-socials {
+  justify-content: start;
+}
+
 /* Footer */
 
 .footer {
   display: grid;
   grid-template-columns: repeat(2, auto);
   align-items: center;
-  margin: 5rem;
-  max-width: 1080px;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 5rem 3rem;
+  max-width: calc(1080px + 10rem);
 }
 
 .resume a {
@@ -275,13 +696,9 @@ p {
   background-position: 0 100%;
   background-size: 0% 2px;
   background-repeat: no-repeat;
-  transition: background-position 0s 0.5s, background-size 0.5s;
-}
-
-.resume i {
-  margin: auto auto 0.25rem auto;
-  transform: rotate(-45deg);
-  vertical-align: middle;
+  transition:
+    background-position 0s 0.5s,
+    background-size 0.5s;
 }
 
 #theme-toggle {
@@ -297,7 +714,10 @@ p {
   font-size: 1.75rem;
   line-height: 2.25rem;
   font-variation-settings: "FILL" 0;
-  transition: filter 0.5s, font-variation-settings 0.5s, transform 0.5s;
+  transition:
+    filter 0.5s,
+    font-variation-settings 0.5s,
+    transform 0.5s;
 }
 
 #theme-toggle .light {
@@ -323,17 +743,43 @@ p {
     color: #ff6969;
   }
 
-  .go-home:is(:hover, :focus-visible) {
+  .go-home:is(:hover, :focus-visible),
+  .inline-link:is(:hover, :focus-visible),
+  .card-link:is(:hover, :focus-visible),
+  .resume a:is(:hover, :focus-visible) {
     background-position: 100% 100%;
     background-size: 100% 2px;
   }
 
-  .intro:hover .gs {
-    fill: #7399c6;
+  .scroll-cue:hover {
+    opacity: 1;
+  }
+
+  .section-nav a:hover span {
+    border-color: var(--text-color);
+  }
+
+  .chips li:hover {
+    border-color: var(--line-strong);
+    background: color-mix(in srgb, var(--text-color) 8%, transparent);
+  }
+
+  .card:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-0.25rem);
+  }
+
+  .contact-form button:is(:hover, :focus-visible) {
+    background: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
   }
 
   /* Root (default blue) theme: glow on hover */
-  body:not(.light-mode):not(.dark-mode) .social-links a:is(:hover, :focus-visible) .fab {
+  body:not(.light-mode):not(.dark-mode)
+    .social-links
+    a:is(:hover, :focus-visible)
+    .fab {
     filter: drop-shadow(0 0 1rem var(--text-color));
   }
 
@@ -358,11 +804,6 @@ p {
     color: #0a7aff;
   }
 
-  .resume a:is(:hover, :focus-visible) {
-    background-position: 100% 100%;
-    background-size: 100% 2px;
-  }
-
   #theme-toggle:is(:hover, :focus-visible) i {
     filter: drop-shadow(0 0 1rem var(--text-color));
     font-variation-settings: "FILL" 1;
@@ -370,6 +811,18 @@ p {
 }
 
 /* Responsive type / spacing */
+
+@media (max-width: 1280px) {
+  .section-nav {
+    right: 1.25rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 @media (max-width: 768px) {
   h1 {
@@ -381,10 +834,16 @@ p {
     line-height: 1.75rem;
   }
 
-  .intro .gs {
-    height: 1.125rem;
-    margin-top: 0;
-    vertical-align: text-top;
+  .panel {
+    padding: 5rem 3rem;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+  }
+
+  .section-nav {
+    display: none;
   }
 
   .social-links a {
@@ -395,6 +854,19 @@ p {
   .fa-bluesky::before {
     font-size: 1.75rem;
   }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .role h3 {
+    font-size: 1.3125rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -403,12 +875,21 @@ p {
     line-height: 2.5rem;
   }
 
-  .content {
-    margin: 3rem;
+  .panel {
+    padding: 4rem 2rem;
   }
 
   .footer {
-    margin: 3rem 3rem 8rem;
+    padding: 0 2rem 3rem;
+  }
+
+  .facts {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
   }
 }
 
@@ -425,6 +906,7 @@ p {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
 }
