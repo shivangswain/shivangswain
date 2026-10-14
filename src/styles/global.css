@@ -492,11 +492,16 @@ textarea {
 
 .hero-title {
 	display: grid;
+	/* Hug the widest line, so "P SWAIN" right-aligns under the end of "SHIVANG". */
+	align-self: flex-start;
 	font-weight: 900;
 	font-stretch: 125%;
 	text-transform: uppercase;
-	/* "SHIVANG" is ~5.2em wide at this stretch, so 19cqi spans the hero's content box. */
-	font-size: 19cqi;
+	/* Width: "SHIVANG" is ~5.2em wide at this stretch, so 19cqi spans the hero.
+	 * Height: the title is ~1.95em tall and the rest of the hero needs ~20rem,
+	 * so on short, wide screens the name shrinks to keep the intro and buttons
+	 * in the first screen. */
+	font-size: clamp(3rem, (100svh - var(--header-h) - 20rem) / 1.95, 19cqi);
 	line-height: 0.8;
 	letter-spacing: -0.035em;
 }
@@ -515,18 +520,14 @@ textarea {
 }
 
 .hero-line {
-	--glyph: var(--fg);
-	--glyph-hover: var(--accent-text);
 	position: relative;
 	display: block;
 	white-space: nowrap;
-	user-select: none;
 }
 
 .hero-line-last {
-	--glyph: var(--accent-text);
-	--glyph-hover: var(--fg);
 	justify-self: end;
+	color: var(--accent-text);
 	background: linear-gradient(to top, var(--accent-mark) 0.22em, transparent 0.22em) 0 -0.04em / 100% 100% no-repeat;
 }
 
@@ -535,27 +536,8 @@ textarea {
 	width: 0.28em;
 }
 
-/* Each letter's real text is invisible and never changes, so its box (and
- * hover area) stays put; ::after draws the visible glyph on top, and that is
- * what squeezes on hover. Squeezing the real text would shrink the letter out
- * from under a resting cursor, ending the hover and making it flicker. */
 .ch {
-	position: relative;
 	display: inline-block;
-	color: transparent;
-}
-
-.ch::after {
-	content: attr(data-ch);
-	position: absolute;
-	inset: 0;
-	text-align: center;
-	color: var(--glyph);
-	pointer-events: none;
-	transition:
-		font-weight 0.5s var(--ease),
-		font-stretch 0.5s var(--ease),
-		color 0.3s;
 }
 
 .scribble {
@@ -1347,12 +1329,6 @@ textarea {
 		background: var(--fg);
 		color: var(--bg);
 		transform: rotate(-12deg);
-	}
-
-	.ch:hover::after {
-		font-weight: 250;
-		font-stretch: 75%;
-		color: var(--glyph-hover);
 	}
 
 	.service-card:hover {

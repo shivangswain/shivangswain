@@ -2,7 +2,7 @@
 import Icon from "./Icon.astro";
 import { site } from "../data/site";
 
-// Each letter is its own span for the staggered entrance and hover squeeze.
+// Each letter is its own span for the staggered entrance.
 // They're hidden from assistive tech; the heading's real text is the sr-only span.
 const letters = (word: string) => [...word];
 ---
@@ -23,14 +23,10 @@ const letters = (word: string) => [...word];
 		<span class="sr-only">Hi, I'm {site.name}.</span>
 		<span class="hero-hi" aria-hidden="true">Hi, I'm</span>
 		<span class="hero-line" aria-hidden="true">
-			{letters(site.firstName).map((ch) => <span class="ch" data-ch={ch}>{ch}</span>)}
+			{letters(site.firstName).map((ch) => <span class="ch">{ch}</span>)}
 		</span>
 		<span class="hero-line hero-line-last" aria-hidden="true">
-			{
-				letters(site.lastName).map((ch) =>
-					ch === " " ? <span class="ch-gap" /> : <span class="ch" data-ch={ch}>{ch}</span>,
-				)
-			}
+			{letters(site.lastName).map((ch) => (ch === " " ? <span class="ch-gap" /> : <span class="ch">{ch}</span>))}
 			<svg class="scribble" viewBox="0 0 200 170" fill="none" aria-hidden="true" focusable="false">
 				<path
 					pathLength="1"
