@@ -36,10 +36,6 @@
 	--radius: 1.25rem;
 	--header-h: 4.5rem;
 	--section-space: clamp(4.5rem, 11vw, 10rem);
-	/* How much accent the footer gradient reaches, kept low enough that the
-	 * footer's small text holds 4.5:1 against it. */
-	--footer-glow-mid: 24%;
-	--footer-glow-end: 40%;
 	--ease: cubic-bezier(0.65, 0.05, 0, 1);
 	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -59,9 +55,6 @@
 	--muted: #dadaf7;
 	--line: rgb(244 244 237 / 0.22);
 	--line-strong: rgb(244 244 237 / 0.55);
-	/* Lime over blue turns teal quickly, so the footer glow stays gentler. */
-	--footer-glow-mid: 12%;
-	--footer-glow-end: 20%;
 }
 
 /* ---------- Base ---------- */
@@ -694,10 +687,6 @@ textarea {
 	padding: var(--section-space) var(--gutter) 0;
 }
 
-.section:last-child {
-	padding-bottom: var(--section-space);
-}
-
 .section-head {
 	display: grid;
 	gap: 1.5rem;
@@ -1262,15 +1251,19 @@ textarea {
 
 /* ---------- Footer ---------- */
 
+/* A tall accent gradient that rises from solid accent at the bottom edge.
+ * Its top padding also provides the space after the last section. */
 .site-footer {
-	padding: clamp(2rem, 5vw, 4rem) var(--gutter) 1.25rem;
+	padding: calc(var(--section-space) + clamp(6rem, 18vw, 16rem)) var(--gutter) 1.25rem;
 	overflow: clip;
 	container-type: inline-size;
 	background: linear-gradient(
 		to bottom,
 		transparent,
-		color-mix(in oklab, var(--accent) var(--footer-glow-mid), var(--bg)) 70%,
-		color-mix(in oklab, var(--accent) var(--footer-glow-end), var(--bg))
+		color-mix(in oklab, var(--accent) 18%, var(--bg)) 25%,
+		color-mix(in oklab, var(--accent) 50%, var(--bg)) 55%,
+		color-mix(in oklab, var(--accent) 85%, var(--bg)) 80%,
+		var(--accent)
 	);
 }
 
@@ -1288,19 +1281,23 @@ textarea {
 	user-select: none;
 }
 
-/* A solid accent band behind the bottom of the letters, like a highlighter.
- * The inline box ends ~0.3em below the baseline, so the band starts 0.28em
- * up from there and straddles the baseline. */
+/* A band in the page background colour behind the bottom of the letters,
+ * cutting through the gradient like a highlighter. The inline box ends ~0.3em
+ * below the baseline, so the band starts 0.28em up and straddles it. */
 .footer-giant span {
 	background: linear-gradient(
 		to top,
 		transparent 0.28em,
-		var(--accent) 0.28em 0.52em,
+		var(--bg) 0.28em 0.52em,
 		transparent 0.52em
 	);
 }
 
+/* The row sits on near-solid accent, so it takes the on-accent colour; the
+ * token overrides carry that through to the clock and theme toggle too. */
 .footer-row {
+	--fg: var(--on-accent);
+	--bg: var(--accent);
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
@@ -1308,7 +1305,7 @@ textarea {
 	gap: 0.75rem 1.5rem;
 	margin-top: 1.5rem;
 	padding-top: 1.25rem;
-	border-top: 1px solid var(--line);
+	border-top: 1px solid color-mix(in oklab, var(--fg) 30%, transparent);
 	font-family: var(--font-mono);
 	font-size: 0.75rem;
 	letter-spacing: 0.06em;
@@ -1323,7 +1320,7 @@ textarea {
 .footer-row a {
 	color: var(--fg);
 	text-decoration: none;
-	background: linear-gradient(var(--accent) 0 0) 0 100% / 0 2px no-repeat;
+	background: linear-gradient(currentColor 0 0) 0 100% / 0 2px no-repeat;
 	transition: background-size 0.4s var(--ease);
 }
 

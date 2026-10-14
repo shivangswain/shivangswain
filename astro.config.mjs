@@ -77,7 +77,9 @@ export default defineConfig({
 				"object-src 'none'",
 				"base-uri 'none'",
 				"form-action 'self' mailto:",
-				"upgrade-insecure-requests",
+				// upgrade-insecure-requests is sent as a header (public/_headers) only:
+				// in a <meta> it makes Safari rewrite http://localhost requests to
+				// https during `npm run preview`, which breaks the fonts locally.
 			],
 			scriptDirective: {
 				resources: ["'self'", "https://static.cloudflareinsights.com"],
