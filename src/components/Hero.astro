@@ -1,0 +1,49 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../data/site";
+
+// Each letter is its own span for the staggered entrance and hover squeeze.
+// They're hidden from assistive tech; the heading's real text is the sr-only span.
+const letters = (word: string) => [...word];
+---
+
+<section class="hero" id="top" aria-labelledby="hero-title">
+	<div class="hero-meta">
+		<p class="status">
+			<span class="pulse" aria-hidden="true"></span>
+			{site.role}<span class="status-sep" aria-hidden="true">/</span>{site.focus}<span
+				class="status-sep"
+				aria-hidden="true">/</span
+			>{site.company}
+		</p>
+		<p class="clock">Bengaluru <time data-clock>--:--</time> IST</p>
+	</div>
+
+	<h1 class="hero-title" id="hero-title">
+		<span class="sr-only">Hi, I'm {site.name}.</span>
+		<span class="hero-hi" aria-hidden="true">Hi, I'm</span>
+		<span class="hero-line" aria-hidden="true">
+			{letters(site.firstName).map((ch) => <span class="ch">{ch}</span>)}
+		</span>
+		<span class="hero-line hero-line-last" aria-hidden="true">
+			{letters(site.lastName).map((ch) => (ch === " " ? <span class="ch-gap" /> : <span class="ch">{ch}</span>))}
+			<svg class="scribble" viewBox="0 0 200 170" fill="none" aria-hidden="true" focusable="false">
+				<path
+					pathLength="1"
+					d="M44 128C10 84 38 20 104 13c62-6 92 44 82 88-10 44-60 62-104 52-40-9-60-48-46-82 14-32 58-50 118-42"
+				></path>
+			</svg>
+		</span>
+	</h1>
+
+	<div class="hero-foot">
+		<p class="hero-intro">
+			I secure AI platforms, cloud infrastructure and container ecosystems at {site.company}, building
+			the <em class="accent">guardrails</em> that let teams ship fast without the risk.
+		</p>
+		<div class="hero-actions">
+			<a class="btn btn-neon" href="#contact">Get in touch<Icon name="arrowRight" /></a>
+			<a class="btn btn-ghost" href="#work">See my work</a>
+		</div>
+	</div>
+</section>

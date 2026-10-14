@@ -1,24 +1,5 @@
 {
-    "compilerOptions": {
-      "lib": ["ES2020", "DOM", "DOM.Iterable"],
-      "module": "ESNext",
-      "skipLibCheck": true,
-      "target": "ES2020",
-      "useDefineForClassFields": true,
-  
-      /* Bundler mode */
-      "allowImportingTsExtensions": true,
-      "isolatedModules": true,
-      "moduleDetection": "force",
-      "moduleResolution": "bundler",
-      "noEmit": true,
-  
-      /* Linting */
-      "noFallthroughCasesInSwitch": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "strict": true
-    },
-    "include": ["src"]
-  }
-  
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
+}

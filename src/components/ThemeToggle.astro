@@ -1,0 +1,12 @@
+---
+import Icon from "./Icon.astro";
+
+/* Cycles light → dark → electric blue. The icon for the active theme is picked
+ * in CSS from <html data-theme>, so it is right before any script runs. */
+---
+
+<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">
+	<Icon name="sun" class="theme-icon theme-icon-light" />
+	<Icon name="moon" class="theme-icon theme-icon-dark" />
+	<Icon name="bolt" class="theme-icon theme-icon-blue" />
+</button>

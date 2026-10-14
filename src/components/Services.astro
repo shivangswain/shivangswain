@@ -1,0 +1,25 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { services } from "../data/site";
+---
+
+<section class="section services" aria-labelledby="services-title">
+	<SectionHead num="02" eyebrow="Focus" id="services-title">What I <em class="accent">do</em></SectionHead>
+
+	<ol class="service-list">
+		{
+			services.map((service, i) => (
+				<li class="service-card reveal">
+					<span class="service-index">{String(i + 1).padStart(2, "0")}</span>
+					<h3 class="service-title">{service.title}</h3>
+					<p class="service-body">{service.body}</p>
+					<ul class="tags" aria-label="Topics">
+						{service.tags.map((tag) => (
+							<li>{tag}</li>
+						))}
+					</ul>
+				</li>
+			))
+		}
+	</ol>
+</section>

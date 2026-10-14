@@ -1,0 +1,66 @@
+---
+import Icon from "./Icon.astro";
+import { site, socials } from "../data/site";
+---
+
+<section class="section contact" id="contact" aria-labelledby="contact-title">
+	<p class="eyebrow reveal"><span class="eyebrow-num">06</span>Contact</p>
+	<h2 class="contact-title reveal" id="contact-title">Let's <em class="accent">talk</em></h2>
+
+	<div class="contact-grid">
+		<div class="contact-main reveal">
+			<p class="lede">
+				Whether it's security, an idea, or just a hello, my inbox is open. Write to me directly or
+				drop a note below.
+			</p>
+			<a class="contact-email" href={`mailto:${site.email}`}>
+				{site.email}<Icon name="arrowUpRight" />
+			</a>
+
+			<form
+				class="contact-form"
+				data-contact-form
+				action={`mailto:${site.email}`}
+				method="post"
+				enctype="text/plain"
+			>
+				<div class="form-row">
+					<label class="field">
+						<span>Name</span>
+						<input type="text" name="name" autocomplete="name" maxlength="100" required />
+					</label>
+					<label class="field">
+						<span>Email</span>
+						<input type="email" name="email" autocomplete="email" maxlength="254" required />
+					</label>
+				</div>
+				<label class="field">
+					<span>Message</span>
+					<textarea name="message" rows="4" maxlength="2000" required></textarea>
+				</label>
+				<div class="form-foot">
+					<button class="btn btn-neon" type="submit">Send message<Icon name="arrowRight" /></button>
+					<p class="form-hint">Opens a draft in your email app. Nothing is sent or stored by this site.</p>
+				</div>
+			</form>
+		</div>
+
+		<nav class="contact-side reveal" aria-label="Social profiles">
+			<p class="eyebrow">Elsewhere</p>
+			<ul class="socials">
+				{
+					socials.map((social) => (
+						<li>
+							<a href={social.href} target="_blank" rel="noopener me">
+								<Icon name={social.icon} class="social-icon" />
+								<span class="social-name">{social.name}</span>
+								<span class="social-handle">{social.handle}</span>
+								<Icon name="arrowUpRight" class="social-arrow" />
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
+</section>

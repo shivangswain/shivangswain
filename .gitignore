@@ -1,6 +1,15 @@
-node_modules
-dist
-dist-ssr
+# build output
+dist/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# environment variables
+.env
+.env.production
 *.local
 
 # Logs

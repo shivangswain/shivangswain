@@ -1,0 +1,23 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { skills } from "../data/site";
+---
+
+<section class="section toolkit" id="toolkit" aria-labelledby="toolkit-title">
+	<SectionHead num="04" eyebrow="Skills" id="toolkit-title">The <em class="accent">toolkit</em></SectionHead>
+
+	<div class="skill-grid">
+		{
+			skills.map((group) => (
+				<div class="skill-group reveal">
+					<h3>{group.group}</h3>
+					<ul class="chips">
+						{group.items.map((item) => (
+							<li>{item}</li>
+						))}
+					</ul>
+				</div>
+			))
+		}
+	</div>
+</section>

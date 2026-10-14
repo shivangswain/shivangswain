@@ -1,6 +1,6 @@
 {
-  "background_color": "#1c2f8c",
-  "description": "I'm Shivang P Swain, a 26 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs.",
+  "background_color": "#0b0b0a",
+  "description": "Shivang P Swain is a Senior Security Architect at Goldman Sachs, specialising in AI platform security, cloud infrastructure and container ecosystems.",
   "display": "standalone",
   "icons": [
     {
@@ -39,5 +39,5 @@
   "scope": "/",
   "short_name": "Shivang",
   "start_url": "/",
-  "theme_color": "#1c2f8c"
+  "theme_color": "#0b0b0a"
 }

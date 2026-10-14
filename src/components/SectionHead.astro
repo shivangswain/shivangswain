@@ -1,0 +1,16 @@
+---
+interface Props {
+	/** Two-digit running number shown in the eyebrow, e.g. "01". */
+	num: string;
+	eyebrow: string;
+	/** id for the <h2>, referenced by the section's aria-labelledby. */
+	id: string;
+}
+
+const { num, eyebrow, id } = Astro.props;
+---
+
+<div class="section-head reveal">
+	<p class="eyebrow"><span class="eyebrow-num">{num}</span>{eyebrow}</p>
+	<h2 class="section-title" id={id}><slot /></h2>
+</div>

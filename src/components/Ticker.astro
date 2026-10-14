@@ -1,0 +1,36 @@
+---
+import { ticker } from "../data/site";
+
+// Two crossing marquee bands. Each track holds the list twice and slides by
+// half its width, so the loop is seamless (one list is wider than any screen).
+// Purely decorative: the same skills are listed in the toolkit section.
+const items = [...ticker, ...ticker];
+const reversed = [...items].reverse();
+---
+
+<div class="ticker" aria-hidden="true">
+	<div class="band band-a">
+		<div class="band-track">
+			{
+				items.map((item) => (
+					<>
+						<span class="band-item">{item}</span>
+						<span class="band-sep" />
+					</>
+				))
+			}
+		</div>
+	</div>
+	<div class="band band-b">
+		<div class="band-track">
+			{
+				reversed.map((item) => (
+					<>
+						<span class="band-item">{item}</span>
+						<span class="band-sep" />
+					</>
+				))
+			}
+		</div>
+	</div>
+</div>
