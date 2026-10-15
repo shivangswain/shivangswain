@@ -596,7 +596,10 @@ textarea {
 }
 
 .hero-intro {
-	max-width: 42rem;
+	/* Fill the room beside the button (up to 48rem) so the intro stays at
+	 * four lines, which the hero's height budget assumes. */
+	flex: 1 1 26rem;
+	max-width: 48rem;
 	font-size: clamp(1.125rem, 1.6vw, 1.5rem);
 	line-height: 1.45;
 	text-wrap: pretty;
