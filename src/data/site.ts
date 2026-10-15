@@ -46,14 +46,13 @@ export const socials = [
 export const nav = [
   { label: "About", href: "#about" },
   { label: "Work", href: "#work" },
-  { label: "Toolkit", href: "#toolkit" },
   { label: "Contact", href: "#contact" },
 ] as const;
 
 /** The About section's copy, one string per paragraph. */
 export const about = [
   "I help engineering teams at Goldman Sachs adopt AI and cloud safely, and modernise security itself with the same tools. I lead architecture reviews, threat models and AI risk assessments, and have helped build the standards, agentic AI controls and red-team exercises behind them.",
-  "Day to day, I build the Zero Trust identity, policy-as-code guardrails and CI/CD security gates that get GenAI copilots, RAG agents and LLM platforms into production under US and EU regulations. I work across AWS, GCP and Azure, with Claude, OpenAI, Gemini, MCP and LangGraph.",
+  "Day to day, I create the controls, identify the threats, build the guardrails and secure the platforms that get applications built with and around GenAI use-cases, Agentic AI, MCP tools and Orchestrations into production under a strictly regulated environment.",
 ] as const;
 
 export const facts = [
@@ -176,7 +175,7 @@ export const skills = [
       "LLM Risk Mitigation",
       "Threat Modelling",
       "Secure Architecture",
-      "Prompt Injection Defence",
+      "Prompt Injection Prevention",
       "Data Leakage Prevention",
       "OWASP Top 10",
       "OWASP LLM Top 10",
