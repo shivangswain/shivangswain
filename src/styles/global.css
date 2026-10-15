@@ -1589,16 +1589,18 @@ textarea {
 		font-size: 1.0625rem;
 	}
 
-	/* The hero fills the first screen: breadcrumb at the top, intro and button
+	/* The hero fills the whole screen: breadcrumb at the top, intro and button
 	 * at the bottom, and the name centred in the space between them, so the
-	 * ticker only appears once you scroll. The bottom padding clears iOS
-	 * Safari's floating toolbar, which sits over the page. */
+	 * ticker only appears once you scroll. It's sized to the large viewport
+	 * (the page runs under iOS Safari's floating toolbar), and the bottom
+	 * padding adds back the browser UI's height (lvh - svh) plus the safe
+	 * area, so the button stays clear of the toolbar. */
 	.hero {
 		display: grid;
 		grid-template-rows: auto 1fr auto;
 		gap: 1.75rem;
-		min-height: calc(100svh - var(--header-h));
-		padding-block: 1.25rem calc(3.25rem + env(safe-area-inset-bottom, 0px));
+		min-height: calc(100lvh - var(--header-h));
+		padding-block: 1.25rem calc(1.5rem + (100lvh - 100svh) + env(safe-area-inset-bottom, 0px));
 	}
 
 	.hero-title {
