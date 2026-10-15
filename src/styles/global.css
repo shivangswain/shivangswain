@@ -1579,27 +1579,30 @@ textarea {
 		--header-h: 4rem;
 	}
 
-	/* The hero fills the first screen: breadcrumb at the top, name centred,
-	 * intro and button at the bottom (padded clear of the browser's bottom
-	 * bar), so the ticker only appears once you scroll. */
-	.hero {
-		display: grid;
-		grid-template-rows: 1fr auto 1fr;
-		gap: 1.75rem;
-		min-height: calc(100svh - var(--header-h));
-		padding-block: 1.25rem calc(2.25rem + env(safe-area-inset-bottom, 0px));
+	/* Text one pixel smaller on phones. */
+	body {
+		font-size: 1rem;
 	}
 
-	.hero-meta {
-		align-self: start;
+	.hero-intro,
+	.lede {
+		font-size: 1.0625rem;
+	}
+
+	/* The hero fills the first screen: breadcrumb at the top, intro and button
+	 * at the bottom, and the name centred in the space between them, so the
+	 * ticker only appears once you scroll. The bottom padding clears iOS
+	 * Safari's floating toolbar, which sits over the page. */
+	.hero {
+		display: grid;
+		grid-template-rows: auto 1fr auto;
+		gap: 1.75rem;
+		min-height: calc(100svh - var(--header-h));
+		padding-block: 1.25rem calc(3.25rem + env(safe-area-inset-bottom, 0px));
 	}
 
 	.hero-title {
 		align-self: center;
-	}
-
-	.hero-foot {
-		align-self: end;
 	}
 
 	.hero-meta .clock {
@@ -1631,7 +1634,12 @@ textarea {
 		grid-template-columns: minmax(0, 1fr);
 	}
 
+	/* Footer row on one line, scaled to fit like the breadcrumb (~41em long). */
 	.footer-row {
-		justify-content: start;
+		flex-wrap: nowrap;
+		gap: 1em;
+		font-size: min(0.75rem, 100cqi / 41);
+		letter-spacing: 0.02em;
+		white-space: nowrap;
 	}
 }
