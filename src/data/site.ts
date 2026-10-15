@@ -42,7 +42,7 @@ export const facts = [
 	{ value: "4+", label: "Years in security engineering" },
 	{ value: "AI", label: "Platform, cloud & container security" },
 	{ value: "BLR", label: "Based in Bengaluru, India" },
-	{ value: "4", label: "Languages: English, Hindi, Tamil & Odia" },
+	{ value: "SEC+", label: "CompTIA Security+ ce certified" },
 ] as const;
 
 export const ticker = [
@@ -177,6 +177,7 @@ export const credentials = [
 		meta: "Issued Jul 2024",
 		href: "/securityplus",
 		cta: "Verify on Credly",
+		mark: "securityplus",
 	},
 	{
 		kind: "Degree",
@@ -185,5 +186,6 @@ export const credentials = [
 		meta: "2018 – 2022 · Burla, India",
 		href: "/degree",
 		cta: "View degree",
+		mark: "vssut",
 	},
 ] as const;

@@ -196,7 +196,6 @@ textarea {
 
 .section-title,
 .manifesto,
-.contact-title,
 .not-found-title {
 	font-weight: 900;
 	font-stretch: 125%;
@@ -207,7 +206,6 @@ textarea {
 
 .section-title .accent,
 .manifesto .accent,
-.contact-title .accent,
 .not-found-title .accent {
 	text-transform: none;
 	font-size: 1.12em;
@@ -265,11 +263,6 @@ textarea {
 .btn-neon {
 	background: var(--accent);
 	color: var(--on-accent);
-}
-
-.btn-ghost {
-	border-color: var(--fg);
-	color: var(--fg);
 }
 
 .btn-sm {
@@ -359,19 +352,32 @@ textarea {
 }
 
 .theme-toggle {
+	/* Hover previews the theme a click switches to (light → dark → blue). */
+	--next-bg: var(--ink);
+	--next-fg: var(--paper);
 	display: grid;
 	place-items: center;
 	width: 2.5rem;
 	height: 2.5rem;
 	padding: 0;
 	border: 0;
-	border-radius: 0.65rem;
+	border-radius: 50%;
 	background: transparent;
 	cursor: pointer;
 	transition:
 		background-color 0.25s,
 		color 0.25s,
 		transform 0.35s var(--ease-out);
+}
+
+[data-theme="dark"] .theme-toggle {
+	--next-bg: var(--blue);
+	--next-fg: var(--paper);
+}
+
+[data-theme="blue"] .theme-toggle {
+	--next-bg: var(--paper);
+	--next-fg: var(--ink);
 }
 
 .theme-icon {
@@ -1024,24 +1030,43 @@ textarea {
 	border: 1px solid var(--line);
 }
 
-/* Watermark badge: centred on the card's right edge so half of it shows,
- * tilted, translucent, and behind the card's content. The badge artwork is a
- * mask, so it paints in the text colour: white on dark themes, ink on paper. */
-.cred-badge {
+/* Watermarks: the credential's badge or emblem, centred on the card's right
+ * edge so half of it shows, tilted, translucent, and behind the content. The
+ * artwork is a mask, so it paints in the text colour: white on dark themes,
+ * ink on paper. */
+.cred-mark {
 	position: absolute;
 	top: 50%;
 	right: 0;
 	z-index: -1;
-	width: clamp(15rem, 62%, 25rem);
-	aspect-ratio: 800 / 730;
 	background: var(--fg);
-	-webkit-mask: url("../assets/securityplus-badge.svg") center / contain no-repeat;
-	mask: url("../assets/securityplus-badge.svg") center / contain no-repeat;
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
 	opacity: 0.1;
 	translate: 50% -50%;
 	rotate: -14deg;
 	pointer-events: none;
 	transition: rotate 0.8s var(--ease-out), opacity 0.4s;
+}
+
+.cred-mark-securityplus {
+	width: clamp(15rem, 62%, 25rem);
+	aspect-ratio: 800 / 730;
+	-webkit-mask-image: url("../assets/securityplus-badge.svg");
+	mask-image: url("../assets/securityplus-badge.svg");
+}
+
+.cred-mark-vssut {
+	width: clamp(12.5rem, 50%, 20rem);
+	aspect-ratio: 443 / 526;
+	/* Its solid band and ribbon read heavier than the badge's linework. */
+	opacity: 0.075;
+	-webkit-mask-image: url("../assets/vssut-emblem.svg");
+	mask-image: url("../assets/vssut-emblem.svg");
 }
 
 .cred-kind {
@@ -1085,20 +1110,10 @@ textarea {
 
 /* Contact */
 
-.contact .eyebrow {
-	margin-bottom: 1.75rem;
-}
-
-.contact-title {
-	font-size: clamp(4rem, 17vw, 16rem);
-	line-height: 0.82;
-}
-
 .contact-grid {
 	display: grid;
 	grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
 	gap: clamp(3rem, 7vw, 7rem);
-	margin-top: clamp(3rem, 6vw, 5rem);
 }
 
 .contact-email {
@@ -1364,11 +1379,6 @@ textarea {
 			0 0 2.5rem color-mix(in srgb, var(--accent) 50%, transparent);
 	}
 
-	.btn-ghost:hover {
-		background: var(--fg);
-		color: var(--bg);
-	}
-
 	.link-arrow:hover {
 		background-size: 0 1.5px;
 		background-position: 100% 100%;
@@ -1380,8 +1390,8 @@ textarea {
 	}
 
 	.theme-toggle:hover {
-		background: var(--fg);
-		color: var(--bg);
+		background: var(--next-bg);
+		color: var(--next-fg);
 		transform: rotate(-12deg);
 	}
 
@@ -1397,7 +1407,7 @@ textarea {
 		color: var(--on-accent);
 	}
 
-	.cred:hover .cred-badge {
+	.cred:hover .cred-mark {
 		rotate: -4deg;
 		opacity: 0.18;
 	}
