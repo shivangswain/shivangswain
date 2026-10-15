@@ -35,8 +35,13 @@ export const nav = [
 	{ label: "Contact", href: "#contact" },
 ] as const;
 
-export const summary =
-	"Security engineer specialising in AI platform security, cloud infrastructure and container ecosystems, with more than four years of experience. I threat-model complex systems, build scalable security guardrails, and enable secure AI innovation across AWS, GCP and Kubernetes, keeping data pipelines and model deployments protected without slowing the teams who build them.";
+/** The About section's copy, one string per paragraph. */
+export const about = [
+	"I partner with engineering teams on two fronts: enabling the business on its AI-first and cloud-first journey, and modernising security itself with cloud-native and AI capabilities. At Goldman Sachs, I lead architecture reviews, threat models and AI risk assessments that inform leadership decisions.",
+	"I've helped build the practice behind that work, from architecture design standards and firm-wide controls for agentic AI to AppSec champion programmes and penetration tests and red-team exercises aimed at AI-first and agentic infrastructure.",
+	"Hands-on, that means Zero Trust identity, policy-as-code guardrails and automated security gates in CI/CD, governing how GenAI copilots, RAG-based agents and LLM platforms reach production under US and EU regulatory frameworks. I work across AWS, GCP and Azure, and with frontier AI providers and agentic frameworks including Claude, OpenAI, Gemini, MCP, A2A, LangGraph and Claude Code.",
+	"From early concept to delivery, I'm as comfortable in a stakeholder review as at the architecture whiteboard.",
+] as const;
 
 export const facts = [
 	{ value: "4+", label: "Years in security engineering" },

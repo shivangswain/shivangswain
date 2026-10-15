@@ -1,16 +1,18 @@
 ---
-import { facts, summary } from "../data/site";
+import { about, facts } from "../data/site";
 ---
 
 <section class="section about" id="about" aria-labelledby="about-title">
 	<p class="eyebrow reveal"><span class="eyebrow-num">01</span>About</p>
 	<h2 class="manifesto reveal" id="about-title">
-		Threat-modelling <em class="accent">systems</em>, building <em class="accent">guardrails</em> and
-		enabling <em class="accent">secure AI</em> across cloud, containers &amp; LLMs.
+		Turning <em class="accent">AI-first</em> and <em class="accent">agentic</em> vision into
+		<em class="accent">governed</em>, production-grade platforms.
 	</h2>
 
 	<div class="about-grid">
-		<p class="lede reveal">{summary}</p>
+		<div class="about-copy reveal">
+			{about.map((paragraph) => <p class="lede">{paragraph}</p>)}
+		</div>
 		<dl class="facts">
 			{
 				facts.map((fact) => (

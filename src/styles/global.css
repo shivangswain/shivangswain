@@ -596,7 +596,7 @@ textarea {
 }
 
 .hero-intro {
-	max-width: 34rem;
+	max-width: 42rem;
 	font-size: clamp(1.125rem, 1.6vw, 1.5rem);
 	line-height: 1.45;
 	text-wrap: pretty;
@@ -721,6 +721,12 @@ textarea {
 	grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
 	gap: clamp(2.5rem, 6vw, 7rem);
 	margin-top: clamp(3rem, 7vw, 6rem);
+}
+
+.about-copy {
+	display: grid;
+	gap: 1.25rem;
+	align-content: start;
 }
 
 .facts {
