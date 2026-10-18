@@ -11,26 +11,22 @@ const reversed = [...items].reverse();
 <div class="ticker" aria-hidden="true">
 	<div class="band band-a">
 		<div class="band-track">
-			{
-				items.map((item) => (
-					<>
-						<span class="band-item">{item}</span>
-						<span class="band-sep" />
-					</>
-				))
-			}
+			{items.map((item) => (
+				<>
+					<span class="band-item">{item}</span>
+					<span class="band-sep" />
+				</>
+			))}
 		</div>
 	</div>
 	<div class="band band-b">
 		<div class="band-track">
-			{
-				reversed.map((item) => (
-					<>
-						<span class="band-item">{item}</span>
-						<span class="band-sep" />
-					</>
-				))
-			}
+			{reversed.map((item) => (
+				<>
+					<span class="band-item">{item}</span>
+					<span class="band-sep" />
+				</>
+			))}
 		</div>
 	</div>
 </div>

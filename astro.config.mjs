@@ -6,7 +6,9 @@ import { defineConfig, fontProviders } from "astro/config";
 // The theme bootstrap is inlined verbatim (see src/layouts/Base.astro), so its
 // hash is computed from the same file and allow-listed in script-src.
 const themeInit = readFileSync(new URL("./src/scripts/theme-init.js", import.meta.url), "utf8");
-const themeInitHash = /** @type {const} */ (`sha256-${createHash("sha256").update(themeInit).digest("base64")}`);
+const themeInitHash = /** @type {const} */ (
+	`sha256-${createHash("sha256").update(themeInit).digest("base64")}`
+);
 
 export default defineConfig({
 	site: "https://shivangswain.com",

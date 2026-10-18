@@ -5,45 +5,46 @@ import { experience } from "../data/site";
 ---
 
 <section class="section work" id="work" aria-labelledby="work-title">
-	<SectionHead num="03" eyebrow="Experience" id="work-title">Track <em class="accent">record</em></SectionHead>
+	<SectionHead num="03" eyebrow="Experience" id="work-title">
+		Track <em class="accent">record</em>
+	</SectionHead>
 
 	<ol class="jobs">
-		{
-			experience.map((job) => (
-				<li class="job reveal">
-					<div class="job-company">
-						<Logo name={job.logo} decorative class="job-logo" />
-						<h3 class="job-name">{job.company}</h3>
-						{job.location && <p class="job-location">{job.location}</p>}
-					</div>
+		{experience.map((job) => (
+			<li class="job reveal">
+				<div class="job-company">
+					<Logo name={job.logo} decorative class="job-logo" />
+					<h3 class="job-name">{job.company}</h3>
+					{job.location && <p class="job-location">{job.location}</p>}
+				</div>
 
-					<ol class="roles">
-						{job.roles.map((role) => (
-							<li class="role">
-								<p class="role-dates">
-									{role.start} – {role.end === "Present" ? (
-										<span class="live">
-											<span class="pulse" aria-hidden="true" />
-											Present
-										</span>
-									) : (
-										role.end
-									)}
-								</p>
-								<h4 class="role-title">{role.title}</h4>
-								{role.level && <p class="role-level">{role.level}</p>}
-								{role.points && (
-									<ul class="role-points">
-										{role.points.map((point) => (
-											<li>{point}</li>
-										))}
-									</ul>
+				<ol class="roles">
+					{job.roles.map((role) => (
+						<li class="role">
+							<p class="role-dates">
+								{role.start} –{" "}
+								{role.end === "Present" ? (
+									<span class="live">
+										<span class="pulse" aria-hidden="true" />
+										Present
+									</span>
+								) : (
+									role.end
 								)}
-							</li>
-						))}
-					</ol>
-				</li>
-			))
-		}
+							</p>
+							<h4 class="role-title">{role.title}</h4>
+							{role.level && <p class="role-level">{role.level}</p>}
+							{role.points && (
+								<ul class="role-points">
+									{role.points.map((point) => (
+										<li>{point}</li>
+									))}
+								</ul>
+							)}
+						</li>
+					))}
+				</ol>
+			</li>
+		))}
 	</ol>
 </section>

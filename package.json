@@ -1,29 +1,35 @@
 {
-  "name": "shivangswain",
-  "version": "2.0.0",
-  "private": true,
-  "type": "module",
-  "description": "Personal site of Shivang P Swain, a Senior Security Architect specialising in AI security at Goldman Sachs.",
-  "author": "Shivang P Swain <me@shivangswain.com> (https://shivangswain.com/)",
-  "homepage": "https://shivangswain.com",
-  "license": "GPL-3.0-or-later",
-  "repository": "github:shivangswain/shivangswain",
-  "engines": {
-    "node": ">=22.12.0"
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "check": "astro check",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "7.3.8"
-  },
-  "devDependencies": {
-    "@astrojs/check": "0.9.10",
-    "@types/node": "24.19.2",
-    "typescript": "6.0.3"
-  }
+	"name": "shivangswain",
+	"version": "2.0.0",
+	"private": true,
+	"type": "module",
+	"description": "Personal site of Shivang P Swain, a Senior Security Architect specialising in AI security at Goldman Sachs.",
+	"author": "Shivang P Swain <me@shivangswain.com> (https://shivangswain.com/)",
+	"homepage": "https://shivangswain.com",
+	"license": "GPL-3.0-or-later",
+	"repository": "github:shivangswain/shivangswain",
+	"engines": {
+		"node": ">=22.12.0"
+	},
+	"scripts": {
+		"format": "prettier --write .",
+		"predev": "npm run format",
+		"dev": "astro dev",
+		"check": "astro check",
+		"prebuild": "npm run format",
+		"build": "astro check && astro build",
+		"prepreview": "npm run format",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"astro": "7.3.8"
+	},
+	"devDependencies": {
+		"@astrojs/check": "0.9.10",
+		"@types/node": "24.19.2",
+		"prettier": "3.9.9",
+		"prettier-plugin-astro": "1.1.1",
+		"typescript": "6.0.3"
+	}
 }

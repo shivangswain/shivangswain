@@ -5,16 +5,19 @@ import { site, socials } from "../data/site";
 ---
 
 <section class="section contact" id="contact" aria-labelledby="contact-title">
-	<SectionHead num="06" eyebrow="Contact" id="contact-title">Let's <em class="accent">talk</em></SectionHead>
+	<SectionHead num="06" eyebrow="Contact" id="contact-title">
+		Let's <em class="accent">talk</em>
+	</SectionHead>
 
 	<div class="contact-grid">
 		<div class="contact-main reveal">
 			<p class="lede">
-				Whether it's security, an idea, or just a hello, my inbox is open. Write to me directly or
-				drop a note below.
+				Whether it's security, an idea, or just a hello, my inbox is open. Write to me directly or drop a note
+				below.
 			</p>
 			<a class="contact-email" href={`mailto:${site.email}`}>
-				{site.email}<Icon name="arrowUpRight" />
+				{site.email}
+				<Icon name="arrowUpRight" />
 			</a>
 
 			<form
@@ -39,7 +42,10 @@ import { site, socials } from "../data/site";
 					<textarea name="message" rows="4" maxlength="2000" required></textarea>
 				</label>
 				<div class="form-foot">
-					<button class="btn btn-neon" type="submit">Send message<Icon name="arrowRight" /></button>
+					<button class="btn btn-neon" type="submit">
+						Send message
+						<Icon name="arrowRight" />
+					</button>
 					<p class="form-hint">Opens a draft in your email app. Nothing is sent or stored by this site.</p>
 				</div>
 			</form>
@@ -48,18 +54,16 @@ import { site, socials } from "../data/site";
 		<nav class="contact-side reveal" aria-label="Social profiles">
 			<p class="eyebrow">Elsewhere</p>
 			<ul class="socials">
-				{
-					socials.map((social) => (
-						<li>
-							<a href={social.href} target="_blank" rel="noopener me">
-								<Icon name={social.icon} class="social-icon" />
-								<span class="social-name">{social.name}</span>
-								<span class="social-handle">{social.handle}</span>
-								<Icon name="arrowUpRight" class="social-arrow" />
-							</a>
-						</li>
-					))
-				}
+				{socials.map((social) => (
+					<li>
+						<a href={social.href} target="_blank" rel="noopener me">
+							<Icon name={social.icon} class="social-icon" />
+							<span class="social-name">{social.name}</span>
+							<span class="social-handle">{social.handle}</span>
+							<Icon name="arrowUpRight" class="social-arrow" />
+						</a>
+					</li>
+				))}
 			</ul>
 		</nav>
 	</div>

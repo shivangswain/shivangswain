@@ -38,7 +38,6 @@ const person = {
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<title>{title}</title>
 		<script is:inline set:html={themeInit} />
-
 		<meta name="description" content={description} />
 		<meta name="author" content={site.name} />
 		{noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
@@ -72,7 +71,9 @@ const person = {
 	</head>
 
 	<body>
-		<a class="skip-link" href="#main">Skip to content</a>
+		<a class="skip-link" href="#main">
+			Skip to content
+		</a>
 		<slot />
 		<script>
 			import "../scripts/main.ts";

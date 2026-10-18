@@ -11,6 +11,11 @@ const { num, eyebrow, id } = Astro.props;
 ---
 
 <div class="section-head reveal">
-	<p class="eyebrow"><span class="eyebrow-num">{num}</span>{eyebrow}</p>
-	<h2 class="section-title" id={id}><slot /></h2>
+	<p class="eyebrow">
+		<span class="eyebrow-num">{num}</span>
+		{eyebrow}
+	</p>
+	<h2 class="section-title" id={id}>
+		<slot />
+	</h2>
 </div>

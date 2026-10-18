@@ -20,19 +20,18 @@ const base = home ? "" : "/";
 
 	<nav class="site-nav" aria-label="Sections">
 		<ul>
-			{
-				nav.map((item) => (
-					<li>
-						<a href={base + item.href}>{item.label}</a>
-					</li>
-				))
-			}
+			{nav.map((item) => (
+				<li>
+					<a href={base + item.href}>{item.label}</a>
+				</li>
+			))}
 		</ul>
 	</nav>
 
 	<div class="header-actions">
 		<a class="btn btn-neon btn-sm" href="/resume" target="_blank" rel="noopener">
-			Résumé<Icon name="arrowUpRight" />
+			Résumé
+			<Icon name="arrowUpRight" />
 		</a>
 		<ThemeToggle />
 	</div>

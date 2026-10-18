@@ -3,7 +3,9 @@ import { about, facts } from "../data/site";
 ---
 
 <section class="section about" id="about" aria-labelledby="about-title">
-	<p class="eyebrow reveal"><span class="eyebrow-num">01</span>About</p>
+	<p class="eyebrow reveal">
+		<span class="eyebrow-num">01</span>About
+	</p>
 	<h2 class="manifesto reveal" id="about-title">
 		Turning <em class="accent">AI-first</em> and <em class="accent">agentic</em> vision into
 		<em class="accent">governed</em>, production-grade platforms.
@@ -11,17 +13,17 @@ import { about, facts } from "../data/site";
 
 	<div class="about-grid">
 		<div class="about-copy reveal">
-			{about.map((paragraph) => <p class="lede">{paragraph}</p>)}
+			{about.map((paragraph) => (
+				<p class="lede">{paragraph}</p>
+			))}
 		</div>
 		<dl class="facts">
-			{
-				facts.map((fact) => (
-					<div class="fact reveal">
-						<dt>{fact.label}</dt>
-						<dd>{fact.value}</dd>
-					</div>
-				))
-			}
+			{facts.map((fact) => (
+				<div class="fact reveal">
+					<dt>{fact.label}</dt>
+					<dd>{fact.value}</dd>
+				</div>
+			))}
 		</dl>
 	</div>
 </section>
