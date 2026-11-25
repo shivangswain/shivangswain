@@ -1,6 +1,6 @@
 # Hello World... Wide Web 👋
 
-I'm [Shivang P Swain](https://shiva.ng), a 26 year old Senior Security Architect specializing in AI security, cloud infrastructure, and container ecosystems at Goldman Sachs.
+I'm [Shivang P Swain](https://shiva.ng), a 26 year old Security Architect specializing in AI security, cloud infrastructure, and container ecosystems at Goldman Sachs.
 
 As a cybersecurity professional with over 4 years of experience driving large-scale security initiatives at a top global investment bank, I'm skilled in AI platform security, threat modelling, building scalable security guardrails, and securing large-scale infrastructure in AWS, GCP, and Kubernetes environments. I'm known for enabling secure AI innovation through pragmatic controls, cross-functional collaboration, and automation-driven security frameworks.
 

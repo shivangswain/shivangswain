@@ -1,23 +1,22 @@
 {
   "author": "Shivang P Swain <me@shivangswain.com> (https://shivangswain.com/)",
-  "description": "I'm Shivang P Swain, a 26 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs.",
+  "description": "I'm Shivang P Swain, a 26 year old AI Security Architect working in the Technology Risk division at Goldman Sachs.",
   "devDependencies": {
-    "@fontsource/playfair-display": "latest",
-    "@fortawesome/fontawesome-free": "latest",
-    "@material-symbols/font-400": "latest",
-    "typescript": "latest",
-    "vite": "latest"
+    "@types/node": "^24.19.4",
+    "subset-font": "^2.9.0",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=22.18"
   },
   "homepage": "https://shivangswain.com",
   "license": "GPL-3.0-or-later",
-  "main": "index.html",
   "name": "shivangswain",
   "private": true,
   "repository": "github:shivangswain/shivangswain",
   "scripts": {
-    "build": "tsc && vite build",
-    "dev": "vite",
-    "preview": "vite preview"
+    "build": "tsc && node --disable-warning=ExperimentalWarning build.ts",
+    "dev": "node --disable-warning=ExperimentalWarning build.ts --serve"
   },
   "type": "module",
   "version": "1.1.0"

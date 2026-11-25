@@ -1,430 +1,359 @@
-/* Fonts. woff2 files are resolved from npm packages (Vite fingerprints them).
- * Open Runde has no package, so it stays a static /assets file. Text faces use
- * `font-display: swap`; icon fonts use `block` to avoid a flash of garbage glyphs. */
+/*
+ * Inlined into each page by build.ts, whose minifier drops whitespace around
+ * { } ; , > and after colons, including inside quoted strings, and drops
+ * comments other than /*! licence notices.
+ */
 
+/* build.ts replaces this url() with an inline subset of the page's glyphs. */
 @font-face {
-  font-family: "Playfair Display";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2") format("woff2");
+	font-family: "Code New Roman";
+	src: url("fonts/CodeNewRoman-Regular.otf");
+	font-display: block;
 }
 
-@font-face {
-  font-family: "Open Runde";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/assets/OpenRunde-Regular.woff2") format("woff2");
-}
-
-/* Self-hosted brand-icon & icon-font backups under a distinct family name, listed as the
- * second choice on `.fab` & `.material-symbols-rounded`, so it's only fetched if the
- * primary Font Awesome kit and/or Google Fonts face (see index.html) is unavailable. */
-@font-face {
-  font-family: "Font Awesome 6 Brands Local";
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url("@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Material Symbols Rounded Local";
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url("@material-symbols/font-400/material-symbols-rounded.woff2") format("woff2");
-}
-
-/* Design tokens. `color-scheme` hints native UI (controls, scrollbars, address
- * bar); theme classes live on <html>, set pre-paint by index.html's bootstrap. */
+/* Themes, set as the <html> class by theme.ts. Without JS, the OS preference
+ * picks dark or light. All text colours meet WCAG AA contrast. */
 
 :root {
-  --bg-color: #1c2f8c;
-  --text-color: #eee;
-  color-scheme: dark;
+	--bg: #050505;
+	--fg: #fafafa;
+	--sub: #a3a3a3;
+	--mut: #7c7c7c;
+	--acc: #7399c6;
+	--line: #ffffff14;
+	color-scheme: dark;
 }
 
-.light-mode {
-  --bg-color: #d7d7d7;
-  --text-color: #111;
-  color-scheme: light;
+@media (prefers-color-scheme: light) {
+	:root:not(.dark, .blue) {
+		--bg: #f5f5f5;
+		--fg: #0a0a0a;
+		--sub: #525252;
+		--mut: #6b6b6b;
+		--acc: #1c2f8c;
+		--line: #0000001a;
+		color-scheme: light;
+	}
 }
 
-.dark-mode {
-  --bg-color: #171717;
-  --text-color: #eee;
-  color-scheme: dark;
+.light {
+	--bg: #f5f5f5;
+	--fg: #0a0a0a;
+	--sub: #525252;
+	--mut: #6b6b6b;
+	--acc: #1c2f8c;
+	--line: #0000001a;
+	color-scheme: light;
+}
+
+.blue {
+	--bg: #1c2f8c;
+	--fg: #f5f5f5;
+	--sub: #d0d6f0;
+	--mut: #a9b4e0;
+	--acc: #f5c542;
+	--line: #ffffff26;
+	color-scheme: dark;
 }
 
 /* Base */
 
 *,
-*::before,
-*::after {
-  box-sizing: border-box;
+::before,
+::after {
+	box-sizing: border-box;
+	margin: 0;
 }
 
 html {
-  overflow-y: scroll;
-  /* reserve scrollbar gutter to avoid layout shift between short/tall pages */
-  scroll-behavior: smooth;
-  /* avoid iOS font upscaling in landscape */
-  text-size-adjust: none;
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-  background: var(--bg-color);
-  color: var(--text-color);
-  font-family: "Open Runde", system-ui, -apple-system, "Segoe UI", sans-serif;
-  filter: opacity(0.8);
-  justify-content: center;
+	display: grid;
+	place-items: center;
+	min-height: 100vh;
+	min-height: 100dvh;
+	padding: 4rem 1.5rem;
+	background: radial-gradient(circle, color-mix(in srgb, var(--acc) 8%, transparent), transparent 18rem) var(--bg);
+	color: var(--fg);
+	font: 1rem/1.5 "Code New Roman", ui-monospace, SFMono-Regular, "SF Mono", "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
+	font-synthesis: none;
+	-webkit-font-smoothing: antialiased;
+	transition: background-color .3s, color .3s;
 }
 
-/* Colour transitions enabled post-paint via .theme-ready (set by themeToggle.ts)
- * so the first frame doesn't animate from the pre-themed colours. */
-
-body.theme-ready {
-  transition: background-color 0.5s, color 0.5s;
+main {
+	width: 100%;
+	max-width: 20rem;
 }
 
-:focus {
-  outline: none;
+::selection {
+	background: color-mix(in srgb, var(--acc) 35%, transparent);
 }
 
 :focus-visible {
-  outline: 2px solid var(--text-color);
-  outline-offset: 4px;
-  border-radius: 2px;
+	outline: 1px solid var(--acc);
+	outline-offset: 4px;
+	border-radius: 2px;
 }
 
-/* Decorative grain overlay; non-interactive. lvh avoids mobile address-bar jumpiness. */
-#noise {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  min-height: 100lvh;
-  background-image: url("/assets/otis-redding.webp");
-  opacity: 0.75;
-  pointer-events: none;
-  z-index: 0;
+/* Header */
+
+header {
+	margin-bottom: 4rem;
 }
 
-/* Layout */
+/* The surname is typed on hover and backspaced after. --t runs from 0 to 8,
+ * the characters in " p swain", in .8s. --n is how many are shown: each
+ * appears or goes at the start of its step. --c is where the caret is: it
+ * eases out to each new position over the first 75% of the step, like an
+ * editor's smooth caret. In a monospace font 1ch is one character. */
 
-main {
-  position: relative;
-  z-index: 1;
-  /* above the noise overlay */
-  display: grid;
-  grid-template-rows: 1fr auto;
-  min-height: 100vh;
-  justify-content: center;
+@property --t {
+	syntax: "<number>";
+	inherits: true;
+	initial-value: 0;
 }
-
-.content {
-  display: grid;
-  place-items: center;
-  margin: 5rem;
-}
-
-.center {
-  max-width: 1080px;
-}
-
-/* Typography */
 
 h1 {
-  display: inline-block;
-  margin-bottom: auto;
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-  font-size: 3.75rem;
-  position: relative;
+	--t: 0;
+	--n: round(down, var(--t), 1);
+	--c: calc(round(up, var(--t), 1) - 1 + pow(1 - min((round(up, var(--t), 1) - var(--t)) / .75, 1), 3));
+	font-size: 1.25rem;
+	font-weight: 400;
+	transition: --t .8s linear;
 }
 
-p {
-  margin-bottom: 2.5rem;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+h1 span {
+	display: inline-block;
+	max-width: calc(var(--n) * 1ch);
+	overflow: hidden;
+	vertical-align: bottom;
+	white-space: pre;
 }
 
-/* Collapsed until the H1 is hovered (see hover block below). */
-.last-name {
-  display: inherit;
-  max-width: 0;
-  overflow: hidden;
-  vertical-align: bottom;
-  white-space: pre;
-  transition: max-width 0.75s;
+/* The caret: solid while it moves, then blinking with a fade. A different
+ * animation name per hover state restarts the blink after each move. */
+h1:has(span)::after {
+	content: "";
+	display: inline-block;
+	width: 2px;
+	height: 1em;
+	margin-left: 1px;
+	vertical-align: text-bottom;
+	background: var(--acc);
+	translate: calc((var(--c) - var(--n)) * 1ch);
+	animation: blink 1.06s .8s infinite;
 }
 
-.error {
-  color: var(--text-color);
-  transition: color 0.5s;
+@keyframes blink {
+	0%,
+	40% {
+		opacity: 1;
+	}
+
+	50%,
+	90% {
+		opacity: 0;
+	}
 }
 
-.go-home {
-  padding-bottom: 1px;
-  color: var(--text-color);
-  text-decoration: inherit;
-  background-image: linear-gradient(var(--text-color) 0 0);
-  background-position: 0 100%;
-  background-size: 0% 2px;
-  background-repeat: no-repeat;
-  transition: background-position 0s 0.5s, background-size 0.5s, color 0.5s;
+@keyframes blink-again {
+	0%,
+	40% {
+		opacity: 1;
+	}
+
+	50%,
+	90% {
+		opacity: 0;
+	}
 }
 
-/* Inline Goldman Sachs logos */
-
-.gs {
-  height: 1.15rem;
-  fill: var(--text-color);
-  vertical-align: text-middle;
-  transition: fill 0.5s;
+header p {
+	margin-top: .25rem;
+	color: var(--mut);
+	font-size: .875rem;
 }
 
-/* Icon fonts (Font Awesome brands + Material Symbols) */
+/* Links. --h is the hover state (0 or 1). The underline grows from the left
+ * and shrinks towards the right: only its width transitions, while its
+ * anchor side switches with --h. */
 
-.fab {
-  display: var(--fa-display, inline-block);
-  font-family: "Font Awesome 6 Brands", "Font Awesome 6 Brands Local";
-  font-style: normal;
-  transition: color 0.5s, filter 0.5s;
+a {
+	--h: 0;
+	color: inherit;
+	text-decoration: none;
+	background: linear-gradient(color-mix(in srgb, var(--acc) 50%, transparent) 0 0) no-repeat calc((1 - var(--h)) * 100%) var(--y, 100%) / calc(var(--h) * 100%) 1px;
+	transition: color .2s, background-size .5s;
 }
 
-.fa-github::before {
-  content: "\f09b";
+a:focus-visible {
+	--h: 1;
+	color: var(--fg);
 }
 
-.fa-linkedin-in::before {
-  content: "\f0e1";
+nav {
+	display: flex;
+	flex-direction: column;
 }
 
-.fa-instagram::before {
-  content: "\f16d";
-
+nav a {
+	--y: calc(100% - .5rem);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: .75rem 0;
+	color: var(--sub);
 }
 
-.fa-bluesky::before {
-  content: "\e671";
-  font-size: 2rem;
+/*! Font Awesome Free 7.3.1 icons by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (icons CC BY 4.0) Copyright 2026 Fonticons Inc. */
+
+/* Font Awesome's arrow-right, turned ↗ for links that open a new tab. */
+nav a::after {
+	content: "";
+	width: .75rem;
+	height: .75rem;
+	background: var(--mut);
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z'/%3E%3C/svg%3E") center / contain no-repeat;
+	opacity: var(--h);
+	translate: calc(var(--h) * 2px - 2px);
+	transition: opacity .2s, translate .2s;
 }
 
-/* Instagram's brand gradient applied to the glyph via text clip */
-.fa-instagram {
-  background: radial-gradient(circle at 30% 110%,
-      #ffdb8b 0%,
-      #ee653d 25%,
-      #d42e81 50%,
-      #a237b6 75%,
-      #3e57bc 100%);
-  background-clip: text;
+nav a[target]::after {
+	rotate: -45deg;
 }
 
-.material-symbols-rounded {
-  display: inline-block;
-  font-family: "Material Symbols Rounded", "Material Symbols Rounded Local";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  text-rendering: optimizeLegibility;
+/* Footer, justified: with the separators as items, all gaps are equal. It
+ * needs 18.625rem on one line; narrower, the key moves to a line of its own. */
+
+footer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0 1ch;
+	margin-top: 4rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--line);
+	color: var(--mut);
+	font-size: .8125rem;
 }
 
-/* Social links */
+@media (width < 21.625rem) {
+	:root[class] .key {
+		order: 1;
+		flex-basis: 100%;
+		margin-top: .5rem;
+	}
 
-.social-links {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  gap: 2.5rem;
-  justify-content: center;
+	:root[class] .key + span {
+		display: none;
+	}
 }
 
-.social-links a {
-  color: var(--text-color);
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+/* GPG key link: Font Awesome's key, read out as "gpg key". The icon is .65em
+ * tall in a fixed-width (fa-fw, 1.25 × as wide) box, its middle level with
+ * the middle of a capital letter. */
+.key {
+	white-space: nowrap;
 }
 
-/* Footer */
-
-.footer {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  align-items: center;
-  margin: 5rem;
-  max-width: 1080px;
+.key::before {
+	content: "";
+	content: "" / "gpg key";
+	display: inline-block;
+	height: .65em;
+	aspect-ratio: 1.25;
+	vertical-align: calc((1cap - .65em) / 2);
+	background: currentColor;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0 160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17l0 80c0 13.3 10.7 24 24 24l80 0c13.3 0 24-10.7 24-24l0-40 40 0c13.3 0 24-10.7 24-24l0-40 40 0c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
-.resume a {
-  display: inline-block;
-  justify-self: start;
-  padding-bottom: 1px;
-  color: var(--text-color);
-  font-size: 1rem;
-  line-height: 1.25rem;
-  text-decoration: inherit;
-  background-image: linear-gradient(var(--text-color) 0 0);
-  background-position: 0 100%;
-  background-size: 0% 2px;
-  background-repeat: no-repeat;
-  transition: background-position 0s 0.5s, background-size 0.5s;
+/* Theme toggle. The symbol is generated content; the text after the slash
+ * is its screen-reader alternative, with a plain fallback declaration before
+ * it. Without JS (no <html> class) the theme follows the OS, so the toggle
+ * and its separator are removed, and the footer fits on one line anyway. */
+
+#theme {
+	margin: -.5rem;
+	padding: .5rem;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+	transition: color .2s;
 }
 
-.resume i {
-  margin: auto auto 0.25rem auto;
-  transform: rotate(-45deg);
-  vertical-align: middle;
+#theme::after {
+	content: "●";
+	content: "●" / "dark";
 }
 
-#theme-toggle {
-  justify-self: end;
-  border: none;
-  border-radius: 50%;
-  background: none;
-  color: var(--text-color);
-  cursor: pointer;
+.light #theme::after {
+	content: "○";
+	content: "○" / "light";
 }
 
-#theme-toggle i {
-  font-size: 1.75rem;
-  line-height: 2.25rem;
-  font-variation-settings: "FILL" 0;
-  transition: filter 0.5s, font-variation-settings 0.5s, transform 0.5s;
+.blue #theme::after {
+	content: "◌";
+	content: "◌" / "blue";
 }
 
-#theme-toggle .light {
-  transform: rotate(-135deg);
+:root:not([class]) #theme,
+:root:not([class]) footer span:has(+ #theme) {
+	display: none;
 }
 
-#theme-toggle .dark {
-  transform: rotate(0deg);
+/* Hover effects for real pointers; touch screens show the full name and the
+ * arrows instead. While typing, characters are shown rounding --t up and the
+ * caret eases out towards the next one. */
+
+@media (hover: hover) {
+	h1:hover {
+		--t: 8;
+		--n: round(up, var(--t), 1);
+		--c: calc(round(down, var(--t), 1) + 1 - pow(1 - min(mod(var(--t), 1) / .75, 1), 3));
+	}
+
+	h1:has(span):hover::after {
+		animation-name: blink-again;
+	}
+
+	a:hover {
+		--h: 1;
+		color: var(--fg);
+	}
+
+	#theme:hover {
+		color: var(--fg);
+	}
 }
 
-#theme-toggle .root {
-  transform: rotate(144deg);
+@media (hover: none) {
+	h1 span {
+		max-width: none;
+	}
+
+	h1:has(span)::after {
+		display: none;
+	}
+
+	nav a::after {
+		opacity: .6;
+		translate: none;
+	}
 }
-
-/* Hover interactions - gated to fine pointers so taps don't leave stuck hover styles. */
-
-@media (hover: hover) and (pointer: fine) {
-  h1:hover .last-name {
-    max-width: 80%;
-  }
-
-  .error:hover {
-    color: #ff6969;
-  }
-
-  .go-home:is(:hover, :focus-visible) {
-    background-position: 100% 100%;
-    background-size: 100% 2px;
-  }
-
-  .intro:hover .gs {
-    fill: #7399c6;
-  }
-
-  /* Root (default blue) theme: glow on hover */
-  body:not(.light-mode):not(.dark-mode) .social-links a:is(:hover, :focus-visible) .fab {
-    filter: drop-shadow(0 0 1rem var(--text-color));
-  }
-
-  /* Brand-coloured hover for the explicit themes */
-  .light-mode .social-links a:is(:hover, :focus-visible) .fa-github,
-  .dark-mode .social-links a:is(:hover, :focus-visible) .fa-github {
-    color: #6e40c9;
-  }
-
-  .light-mode .social-links a:is(:hover, :focus-visible) .fa-linkedin-in,
-  .dark-mode .social-links a:is(:hover, :focus-visible) .fa-linkedin-in {
-    color: #0a66c2;
-  }
-
-  .light-mode .social-links a:is(:hover, :focus-visible) .fa-instagram,
-  .dark-mode .social-links a:is(:hover, :focus-visible) .fa-instagram {
-    color: transparent;
-  }
-
-  .light-mode .social-links a:is(:hover, :focus-visible) .fa-bluesky,
-  .dark-mode .social-links a:is(:hover, :focus-visible) .fa-bluesky {
-    color: #0a7aff;
-  }
-
-  .resume a:is(:hover, :focus-visible) {
-    background-position: 100% 100%;
-    background-size: 100% 2px;
-  }
-
-  #theme-toggle:is(:hover, :focus-visible) i {
-    filter: drop-shadow(0 0 1rem var(--text-color));
-    font-variation-settings: "FILL" 1;
-  }
-}
-
-/* Responsive type / spacing */
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 3rem;
-  }
-
-  p {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-
-  .intro .gs {
-    height: 1.125rem;
-    margin-top: 0;
-    vertical-align: text-top;
-  }
-
-  .social-links a {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-
-  .fa-bluesky::before {
-    font-size: 1.75rem;
-  }
-}
-
-@media (max-width: 640px) {
-  h1 {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-
-  .content {
-    margin: 3rem;
-  }
-
-  .footer {
-    margin: 3rem 3rem 8rem;
-  }
-}
-
-/* Respect prefers-reduced-motion: strip animations and smooth scrolling. */
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
+	*,
+	::before,
+	::after {
+		animation: none !important;
+		transition: none !important;
+	}
 }

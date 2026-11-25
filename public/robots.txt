@@ -1,8 +1,7 @@
 User-agent: *
-Allow: /
-Allow: /assets/
+Crawl-delay: 10
 
-# Prevent crawling of social media redirect links
+# Redirects to external profiles
 Disallow: /blog
 Disallow: /bluesky
 Disallow: /facebook
@@ -10,8 +9,10 @@ Disallow: /github
 Disallow: /gitlab
 Disallow: /instagram
 Disallow: /linkedin
+Disallow: /mastodon
 Disallow: /medium
 Disallow: /paypal
+Disallow: /pinterest
 Disallow: /reddit
 Disallow: /snapchat
 Disallow: /telegram
@@ -20,6 +21,3 @@ Disallow: /tiktok
 Disallow: /twitter
 Disallow: /x
 Disallow: /youtube
-
-# Crawl-delay
-Crawl-delay: 10
