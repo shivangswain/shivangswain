@@ -72,6 +72,10 @@ async function inlineFonts(sheet: string, text: string): Promise<{ sheet: string
 	return { sheet, bytes };
 }
 
+// Inline scripts must run where they are, before first paint, so they opt
+// out of Cloudflare's Rocket Loader, which would otherwise defer them.
+const SCRIPT = '<script data-cfasync="false">';
+
 // Minifies the markup (whitespace spanning a line break is formatting), then
 // inlines the scripts and stylesheet.
 async function page(file: string): Promise<{ html: string; font: number }> {
@@ -80,7 +84,7 @@ async function page(file: string): Promise<{ html: string; font: number }> {
 		.replace(/>\s*\n\s*</g, "><")
 		.replace(/\s*\n\s*/g, " ")
 		.trim()
-		.replace(/<script src="([^"]+\.ts)"><\/script>/g, (_, src: string) => `<script>${js(src)}</script>`);
+		.replace(/<script src="([^"]+\.ts)"><\/script>/g, (_, src: string) => `${SCRIPT}${js(src)}</script>`);
 
 	let font = 0;
 	const link = html.match(/<link rel="stylesheet" href="([^"]+)">/);
@@ -104,8 +108,9 @@ async function build(): Promise<boolean> {
 	for (const file of readdirSync(SRC).filter((f) => f.endsWith(".html"))) {
 		const { html, font } = await page(file);
 		writeFileSync(join(OUT, file), html);
-		for (const [, code] of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
-			hashes.add(`'sha256-${createHash("sha256").update(code!).digest("base64")}'`);
+		for (const part of html.split(SCRIPT).slice(1)) {
+			const code = part.slice(0, part.indexOf("</script>"));
+			hashes.add(`'sha256-${createHash("sha256").update(code).digest("base64")}'`);
 		}
 
 		// Gzip is the largest encoding a browser receives.
