@@ -1,24 +1,22 @@
 {
-    "compilerOptions": {
-      "lib": ["ES2020", "DOM", "DOM.Iterable"],
-      "module": "ESNext",
-      "skipLibCheck": true,
-      "target": "ES2020",
-      "useDefineForClassFields": true,
-  
-      /* Bundler mode */
-      "allowImportingTsExtensions": true,
-      "isolatedModules": true,
-      "moduleDetection": "force",
-      "moduleResolution": "bundler",
-      "noEmit": true,
-  
-      /* Linting */
-      "noFallthroughCasesInSwitch": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "strict": true
-    },
-    "include": ["src"]
-  }
-  
+  // Type-check only; Node strips the types when running and building.
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
+    "module": "nodenext",
+    "types": ["node"],
+    "noEmit": true,
+    "skipLibCheck": true,
+
+    /* Syntax Node's type stripping supports */
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+
+    /* Linting */
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": ["src", "build.ts", "subset-font.d.ts"]
+}

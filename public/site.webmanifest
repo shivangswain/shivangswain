@@ -1,36 +1,18 @@
 {
-  "background_color": "#1c2f8c",
-  "description": "I'm Shivang P Swain, a 26 year old cybersecurity associate working in the Technology Risk division at Goldman Sachs.",
+  "background_color": "#050505",
+  "description": "I'm Shivang P Swain, a 26 year old AI Security Architect working in the Technology Risk division at Goldman Sachs.",
   "display": "standalone",
   "icons": [
     {
-      "purpose": "maskable",
-      "sizes": "96x96",
-      "src": "/assets/96.png",
-      "type": "image/png"
-    },
-    {
-      "purpose": "maskable",
+      "purpose": "any maskable",
       "sizes": "192x192",
       "src": "/assets/192.png",
       "type": "image/png"
     },
     {
-      "purpose": "maskable",
-      "sizes": "384x384",
-      "src": "/assets/384.png",
-      "type": "image/png"
-    },
-    {
-      "purpose": "maskable",
+      "purpose": "any maskable",
       "sizes": "512x512",
       "src": "/assets/512.png",
-      "type": "image/png"
-    },
-    {
-      "purpose": "maskable",
-      "sizes": "1024x1024",
-      "src": "/assets/1024.png",
       "type": "image/png"
     }
   ],
@@ -39,5 +21,5 @@
   "scope": "/",
   "short_name": "Shivang",
   "start_url": "/",
-  "theme_color": "#1c2f8c"
+  "theme_color": "#050505"
 }

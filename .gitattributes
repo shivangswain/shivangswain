@@ -1,0 +1,4 @@
+# Served byte for byte: pwacompat is pinned by its SRI hash, and the WKD key
+# is binary. Without this, core.autocrlf would rewrite their line endings.
+public/assets/pwacompat.min.js* -text
+public/.well-known/openpgpkey/hu/* binary
