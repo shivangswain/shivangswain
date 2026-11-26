@@ -106,10 +106,14 @@ header {
 }
 
 /* The surname is typed on hover and backspaced after. --t runs from 0 to 8,
- * the characters in " p swain", in .8s. --n is how many are shown: each
- * appears or goes at the start of its step. --c is where the caret is: it
- * eases out to each new position over the first 75% of the step, like an
- * editor's smooth caret. In a monospace font 1ch is one character. */
+ * the characters in " p swain", in .8s, either way; the linear() timing
+ * gives each character its own 60-140ms (70, 120, 85, 140, 95, 60, 130,
+ * 100), like real typing. --c is the caret: it
+ * glides (smoothstep) one character over the first 75% of each step, like an
+ * editor's smooth caret. --n is the characters shown: those the caret has
+ * reached or is gliding to, so typing reveals one ahead of the caret and
+ * backspacing erases it as the caret arrives. In a monospace font 1ch is one
+ * character. */
 
 @property --t {
 	syntax: "<number>";
@@ -119,11 +123,13 @@ header {
 
 h1 {
 	--t: 0;
-	--n: round(down, var(--t), 1);
-	--c: calc(round(up, var(--t), 1) - 1 + pow(1 - min((round(up, var(--t), 1) - var(--t)) / .75, 1), 3));
+	--n: round(up, var(--t), 1);
+	--x: min(mod(var(--t), 1) / .75, 1);
+	--c: calc(round(down, var(--t), 1) + var(--x) * var(--x) * (3 - 2 * var(--x)));
 	font-size: 1.25rem;
 	font-weight: 400;
 	transition: --t .8s linear;
+	transition: --t .8s linear(0, .125 8.75%, .25 23.75%, .375 34.375%, .5 51.875%, .625 63.75%, .75 71.25%, .875 87.5%, 1);
 }
 
 h1 span {
@@ -310,14 +316,11 @@ footer {
 }
 
 /* Hover effects for real pointers; touch screens show the full name and the
- * arrows instead. While typing, characters are shown rounding --t up and the
- * caret eases out towards the next one. */
+ * arrows instead. */
 
 @media (hover: hover) {
 	h1:hover {
 		--t: 8;
-		--n: round(up, var(--t), 1);
-		--c: calc(round(down, var(--t), 1) + 1 - pow(1 - min(mod(var(--t), 1) / .75, 1), 3));
 	}
 
 	h1:has(span):hover::after {
